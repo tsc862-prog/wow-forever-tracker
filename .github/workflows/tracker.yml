@@ -1,0 +1,46 @@
+name: WoW Forever tracker
+
+on:
+  schedule:
+    # Every 30 minutes, offset from the top of the hour when GitHub is busiest.
+    - cron: "7,37 * * * *"
+  workflow_dispatch:
+    inputs:
+      test_webhook:
+        description: "Only send a test message to Discord"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: wow-forever-tracker
+  cancel-in-progress: false
+
+jobs:
+  track:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check characters and post milestones
+        env:
+          BLIZZARD_CLIENT_ID: ${{ secrets.BLIZZARD_CLIENT_ID }}
+          BLIZZARD_CLIENT_SECRET: ${{ secrets.BLIZZARD_CLIENT_SECRET }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          PROFILE_NAMESPACE: ${{ vars.PROFILE_NAMESPACE }}
+        run: python3 tracker.py ${{ inputs.test_webhook && '--test-webhook' || '' }}
+
+      - name: Save progress
+        run: |
+          if [ -n "$(git status --porcelain state.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+            git add state.json
+            git commit -m "Update tracker state [skip ci]"
+            git push
+          else
+            echo "No changes to save."
+          fi
