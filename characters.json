@@ -1,0 +1,45 @@
+{
+  "region": "us",
+  "settings": {
+    "max_level": 60,
+    "track_levels": true,
+    "track_professions": true,
+    "profession_milestones": [75, 150, 225, 300],
+    "track_dungeons": true,
+    "track_raids": true,
+    "track_achievements": true
+  },
+  "friends": [
+    {
+      "name": "Tim",
+      "characters": [
+        { "name": "Firstname", "surname": "Secondname" },
+        { "name": "Altname", "surname": "Secondname" }
+      ]
+    },
+    {
+      "name": "Friend 1",
+      "characters": [
+        { "name": "Firstname", "surname": "Secondname" }
+      ]
+    },
+    {
+      "name": "Friend 2",
+      "characters": [
+        { "name": "Firstname", "surname": "Secondname" }
+      ]
+    },
+    {
+      "name": "Friend 3",
+      "characters": [
+        { "name": "Firstname", "surname": "Secondname" }
+      ]
+    },
+    {
+      "name": "Friend 4",
+      "characters": [
+        { "name": "Firstname", "surname": "Secondname" }
+      ]
+    }
+  ]
+}
