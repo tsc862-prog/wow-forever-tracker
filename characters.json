@@ -13,32 +13,9 @@
     {
       "name": "Tim",
       "characters": [
-        { "name": "Firstname", "surname": "Secondname" },
-        { "name": "Altname", "surname": "Secondname" }
-      ]
-    },
-    {
-      "name": "Friend 1",
-      "characters": [
-        { "name": "Firstname", "surname": "Secondname" }
-      ]
-    },
-    {
-      "name": "Friend 2",
-      "characters": [
-        { "name": "Firstname", "surname": "Secondname" }
-      ]
-    },
-    {
-      "name": "Friend 3",
-      "characters": [
-        { "name": "Firstname", "surname": "Secondname" }
-      ]
-    },
-    {
-      "name": "Friend 4",
-      "characters": [
-        { "name": "Firstname", "surname": "Secondname" }
+        { "name": "Calutron", "surname": "Wheatfang" },
+        { "name": "Hefe", "surname": "Weizenson" },
+        { "name": "Belgara", "surname": "Bluemoon" }
       ]
     }
   ]
