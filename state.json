@@ -1,16 +1,18 @@
 {
   "characters": {
     "us:hefe-weizenson": {
-      "achievements": {},
+      "achievements": {
+        "779": "Explore Loch Modan"
+      },
       "class": "Paladin",
       "dungeons": {},
       "gear": {},
-      "level": 14,
+      "level": 15,
       "professions": {
-        "Blacksmithing": 70,
+        "Blacksmithing": 75,
         "Cooking": 5,
         "Fishing": 1,
-        "Mining": 77
+        "Mining": 91
       },
       "race": "Dwarf",
       "raids": {}
