@@ -20,13 +20,13 @@
       "class": "Hunter",
       "dungeons": {},
       "gear": {},
-      "level": 14,
+      "level": 15,
       "professions": {
         "Cooking": 2,
         "Engineering": 78,
         "First Aid": 1,
-        "Fishing": 1,
-        "Mining": 63
+        "Fishing": 20,
+        "Mining": 70
       },
       "race": "Dwarf",
       "raids": {}
