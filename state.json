@@ -18,11 +18,13 @@
       "achievements": {},
       "class": "Hunter",
       "dungeons": {},
-      "level": 12,
+      "level": 14,
       "professions": {
-        "Cooking": 1,
-        "Engineering": 20,
-        "Mining": 27
+        "Cooking": 2,
+        "Engineering": 78,
+        "First Aid": 1,
+        "Fishing": 1,
+        "Mining": 63
       },
       "race": "Dwarf",
       "raids": {}
