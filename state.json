@@ -4,6 +4,7 @@
       "achievements": {},
       "class": "Paladin",
       "dungeons": {},
+      "gear": {},
       "level": 14,
       "professions": {
         "Blacksmithing": 42,
@@ -18,6 +19,7 @@
       "achievements": {},
       "class": "Hunter",
       "dungeons": {},
+      "gear": {},
       "level": 14,
       "professions": {
         "Cooking": 2,
@@ -30,5 +32,49 @@
       "raids": {}
     }
   },
-  "group": {}
+  "group": {},
+  "owners": {
+    "gabe": {
+      "mounts": {
+        "3111": "Cerulean Prideclaw",
+        "3130": "Veteran Adventurer's Loyal Companion"
+      }
+    },
+    "tim": {
+      "mounts": {
+        "3111": "Cerulean Prideclaw",
+        "3130": "Veteran Adventurer's Loyal Companion"
+      }
+    }
+  },
+  "weekly": {
+    "baseline": {
+      "us:hefe-weizenson": {
+        "bosses": [],
+        "dungeons": [],
+        "epics": [],
+        "level": 14,
+        "professions": {
+          "Blacksmithing": 42,
+          "Cooking": 5,
+          "Fishing": 1,
+          "Mining": 68
+        }
+      },
+      "us:tired-mexican": {
+        "bosses": [],
+        "dungeons": [],
+        "epics": [],
+        "level": 14,
+        "professions": {
+          "Cooking": 2,
+          "Engineering": 78,
+          "First Aid": 1,
+          "Fishing": 1,
+          "Mining": 63
+        }
+      }
+    },
+    "last_recap": "2026-11-05T15:15:33.037851+00:00"
+  }
 }
