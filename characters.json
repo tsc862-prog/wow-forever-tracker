@@ -17,6 +17,12 @@
         { "name": "Hefe", "surname": "Weizenson" },
         { "name": "Belgara", "surname": "Bluemoon" }
       ]
+    },
+    {
+      "name": "Gabe",
+      "characters": [
+        { "name": "Tired", "surname": "Mexican" }
+      ]
     }
   ]
 }
