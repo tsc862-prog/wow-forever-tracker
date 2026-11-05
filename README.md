@@ -7,6 +7,9 @@ Every 30 minutes, checks your group's WoW: Forever characters and posts one Disc
 - 🗝️ Dungeons cleared for the first time
 - ⚔️ Raid bosses killed for the first time, 🐉 full raid clears
 - 🎖️ Achievements earned
+- 🟣 Every new epic equipped, and 🔵 each character's first blue
+- 🐎 New mounts (once per friend, since mounts are account-wide)
+- 📅 A weekly recap leaderboard every Sunday evening (first run after 7 pm Pacific)
 
 If nothing changed, it posts nothing. Each character with news gets its own card, colored by class.
 
@@ -64,6 +67,8 @@ Then run it once more without the box ticked. The first check posts a "Now track
 |---|---|
 | `track_levels`, `track_professions`, `track_dungeons`, `track_raids`, `track_achievements` | Set any to `false` to stop posting that kind of update |
 | `profession_milestones` | Skill levels that get announced |
+| `track_gear`, `track_mounts`, `weekly_recap` | Set to `false` to turn off gear, mount or recap posts |
+| `recap_day`, `recap_hour`, `timezone` | When the weekly recap is posted |
 | `max_level` | Level cap (60) |
 
 ## If nothing shows up

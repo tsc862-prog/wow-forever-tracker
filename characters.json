@@ -4,10 +4,21 @@
     "max_level": 60,
     "track_levels": true,
     "track_professions": true,
-    "profession_milestones": [75, 150, 225, 300],
+    "profession_milestones": [
+      75,
+      150,
+      225,
+      300
+    ],
     "track_dungeons": true,
     "track_raids": true,
-    "track_achievements": true
+    "track_achievements": true,
+    "track_gear": true,
+    "track_mounts": true,
+    "weekly_recap": true,
+    "recap_day": "sunday",
+    "recap_hour": 19,
+    "timezone": "America/Los_Angeles"
   },
   "friends": [
     {

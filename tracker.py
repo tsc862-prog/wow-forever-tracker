@@ -11,10 +11,16 @@ Discord message with everything that changed since then:
   - dungeons cleared for the first time
   - raid bosses killed for the first time, and full raid clears
   - achievements earned
+  - gear: every new epic/legendary equipped, and a character's first blue
+  - mounts: new mounts (mounts are account-wide, so posted once per friend)
+
+Once a week (Sunday evening by default) the first run after the recap time
+also posts a weekly recap: a leaderboard with each character's progress
+since the last recap.
 
 Anything a character already had when it was first tracked is recorded
-quietly, so only new progress gets posted. Uses only the Python
-standard library.
+quietly, so only new progress gets posted. All posts are silent (no
+notifications). Uses only the Python standard library.
 
 Environment variables:
   BLIZZARD_CLIENT_ID      Battle.net API client ID
@@ -26,6 +32,7 @@ Usage:
   python3 tracker.py                 normal run
   python3 tracker.py --dry-run       print what would be posted, save nothing
   python3 tracker.py --test-webhook  send a test message to Discord and exit
+  python3 tracker.py --recap-now     post the weekly recap now (from saved data)
 """
 
 import argparse
@@ -37,13 +44,15 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 CONFIG_PATH = ROOT / "characters.json"
 STATE_PATH = ROOT / "state.json"
-USER_AGENT = "WoWForeverTracker/1.1"
+USER_AGENT = "WoWForeverTracker/1.2"
 DEFAULT_COLOR = 0x5865F2
+RECAP_COLOR = 0xF1C40F
 
 CLASS_COLORS = {
     "Druid": 0xFF7C0A,
@@ -57,6 +66,9 @@ CLASS_COLORS = {
     "Warrior": 0xC69B6D,
 }
 
+QUALITY_RANK = {"POOR": 0, "COMMON": 1, "UNCOMMON": 2, "RARE": 3, "EPIC": 4, "LEGENDARY": 5, "ARTIFACT": 6}
+DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+
 DEFAULT_SETTINGS = {
     "max_level": 60,
     "track_levels": True,
@@ -65,6 +77,12 @@ DEFAULT_SETTINGS = {
     "track_dungeons": True,
     "track_raids": True,
     "track_achievements": True,
+    "track_gear": True,
+    "track_mounts": True,
+    "weekly_recap": True,
+    "recap_day": "sunday",
+    "recap_hour": 19,
+    "timezone": "America/Los_Angeles",
 }
 
 
@@ -205,6 +223,36 @@ def parse_achievements(body):
     return done
 
 
+def parse_equipment(body):
+    """{item id: {"name", "quality", "slot"}} for blue-or-better items currently equipped."""
+    if not isinstance(body, dict):
+        return None
+    out = {}
+    for it in body.get("equipped_items") or []:
+        quality = ((it.get("quality") or {}).get("type") or "").upper()
+        if QUALITY_RANK.get(quality, 0) < QUALITY_RANK["RARE"]:
+            continue
+        item_id = str((it.get("item") or {}).get("id") or it.get("name"))
+        out[item_id] = {
+            "name": it.get("name") or name_of(it) or "an item",
+            "quality": quality,
+            "slot": (it.get("slot") or {}).get("name") or "",
+        }
+    return out
+
+
+def parse_mounts(body):
+    """{mount id: name} for mounts the account has collected."""
+    if not isinstance(body, dict):
+        return None
+    out = {}
+    for m in body.get("mounts") or []:
+        mount = m.get("mount") or {}
+        if mount.get("id") is not None:
+            out[str(mount["id"])] = name_of(mount) or "a mount"
+    return out
+
+
 def fetch_snapshot(c, region, token, namespace, settings):
     """Return the character's current snapshot, or None if Blizzard has no data."""
     for path in candidate_paths(c):
@@ -235,6 +283,10 @@ def fetch_snapshot(c, region, token, namespace, settings):
             snap["raids"] = sub("/encounters/raids", parse_encounters)
         if settings["track_achievements"]:
             snap["achievements"] = sub("/achievements", parse_achievements)
+        if settings["track_gear"]:
+            snap["_equipped"] = sub("/equipment", parse_equipment)
+        if settings["track_mounts"]:
+            snap["_mounts"] = sub("/collections/mounts", parse_mounts)
         return snap
     return None
 
@@ -301,7 +353,37 @@ def find_changes(key, old, new, settings, group):
             if aid not in old_a:
                 lines.append(f"🎖️ {name}")
 
+    # Gear: every new epic/legendary, and the character's first blue.
+    # "gear" in the snapshot is every blue+ item ever seen equipped, so
+    # swapping an item off and back on doesn't post it twice.
+    old_g, equipped = old.get("gear"), new.get("_equipped")
+    if old_g is not None and equipped is not None:
+        had_blue = bool(old_g)
+        for item_id, it in sorted(equipped.items(), key=lambda kv: -QUALITY_RANK.get(kv[1]["quality"], 0)):
+            if item_id in old_g:
+                continue
+            slot = f" ({it['slot']})" if it["slot"] else ""
+            if QUALITY_RANK.get(it["quality"], 0) >= QUALITY_RANK["EPIC"]:
+                icon = "🟠" if it["quality"] == "LEGENDARY" else "🟣"
+                lines.append(f"{icon} Equipped **{it['name']}**{slot}")
+            elif not had_blue:
+                lines.append(f"🔵 First blue: **{it['name']}**{slot}")
+                had_blue = True
+
     return lines
+
+
+def merge_gear(old, new):
+    """Fold this run's equipped blue+ items into the character's 'ever seen' list."""
+    seen = dict((old or {}).get("gear") or {})
+    equipped = new.pop("_equipped", None)
+    if equipped is None:
+        if old and old.get("gear") is not None:
+            new["gear"] = old["gear"]
+        return
+    for item_id, it in equipped.items():
+        seen.setdefault(item_id, {"name": it["name"], "quality": it["quality"]})
+    new["gear"] = seen
 
 
 def keep_baselines(old, new):
@@ -322,6 +404,97 @@ def character_embed(c, snap, lines):
         "color": CLASS_COLORS.get(snap.get("class"), DEFAULT_COLOR),
         "footer": {"text": f"Level {snap.get('level') or '?'} {describe}".strip()},
     }
+
+
+# ---------------------------------------------------------------- Weekly recap
+
+def local_zone(settings):
+    try:
+        from zoneinfo import ZoneInfo
+        return ZoneInfo(settings["timezone"])
+    except Exception:
+        return timezone(timedelta(hours=-8))
+
+
+def last_recap_time(now, settings):
+    """The most recent recap moment (e.g. last Sunday 7 pm local) at or before now."""
+    zone = local_zone(settings)
+    local = now.astimezone(zone)
+    target_day = DAYS.index(settings["recap_day"].strip().lower())
+    days_back = (local.weekday() - target_day) % 7
+    moment = (local - timedelta(days=days_back)).replace(
+        hour=int(settings["recap_hour"]), minute=0, second=0, microsecond=0)
+    if moment > local:
+        moment -= timedelta(days=7)
+    return moment
+
+
+def recap_summary(snap):
+    """The numbers a weekly recap compares."""
+    return {
+        "level": snap.get("level") or 0,
+        "dungeons": sorted(k for k, v in (snap.get("dungeons") or {}).items() if v.get("cleared")),
+        "bosses": sorted(f"{i}|{b}" for i, v in (snap.get("raids") or {}).items() for b in v.get("bosses", [])),
+        "epics": sorted(k for k, v in (snap.get("gear") or {}).items()
+                        if QUALITY_RANK.get(v.get("quality"), 0) >= QUALITY_RANK["EPIC"]),
+        "professions": dict(snap.get("professions") or {}),
+    }
+
+
+def build_recap(characters, state, settings, week_start):
+    weekly = state.setdefault("weekly", {})
+    baseline = weekly.setdefault("baseline", {})
+    rows, total_levels = [], 0
+
+    for c, key in characters:
+        snap = state["characters"].get(key)
+        if not snap:
+            continue
+        now_s = recap_summary(snap)
+        base = baseline.get(key) or now_s
+        gained = now_s["level"] - base["level"]
+        total_levels += max(gained, 0)
+
+        extras = []
+        new_dungeons = len(set(now_s["dungeons"]) - set(base["dungeons"]))
+        new_bosses = len(set(now_s["bosses"]) - set(base["bosses"]))
+        new_epics = len(set(now_s["epics"]) - set(base["epics"]))
+        if new_dungeons:
+            extras.append(f"🗝️ {new_dungeons} dungeon{'s' * (new_dungeons > 1)}")
+        if new_bosses:
+            extras.append(f"⚔️ {new_bosses} boss{'es' * (new_bosses > 1)}")
+        if new_epics:
+            extras.append(f"🟣 {new_epics} epic{'s' * (new_epics > 1)}")
+        profs = sorted(now_s["professions"].items(), key=lambda kv: -kv[1])
+        prof_text = ", ".join(f"{p} {s}" for p, s in profs if s > 1)[:120]
+
+        line = f"**{display_name(c)}**: Lv {now_s['level']}"
+        line += f" (+{gained})" if gained > 0 else " (no change)"
+        if extras:
+            line += " · " + " · ".join(extras)
+        if prof_text:
+            line += f"\n  {prof_text}"
+        rows.append((now_s["level"], gained, line))
+
+    if not rows:
+        return None
+    rows.sort(key=lambda r: (-r[1], -r[0]))  # most levels gained this week first
+    medals = ["🥇", "🥈", "🥉"]
+    body = "\n".join(
+        f"{medals[i] if i < 3 and r[1] > 0 else '•'} {r[2]}" for i, r in enumerate(rows))
+    return {
+        "title": f"📅 Weekly recap: week ending {week_start.strftime('%b %-d')}",
+        "description": body[:4000],
+        "color": RECAP_COLOR,
+        "footer": {"text": f"Group total: +{total_levels} level{'s' * (total_levels != 1)} this week"},
+    }
+
+
+def reset_recap_baseline(characters, state, when):
+    weekly = state.setdefault("weekly", {})
+    weekly["baseline"] = {key: recap_summary(state["characters"][key])
+                          for _, key in characters if key in state["characters"]}
+    weekly["last_recap"] = when.astimezone(timezone.utc).isoformat()
 
 
 # ---------------------------------------------------------------- Discord
@@ -371,6 +544,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--dry-run", action="store_true", help="print messages instead of posting; save nothing")
     parser.add_argument("--test-webhook", action="store_true", help="send a test message to Discord and exit")
+    parser.add_argument("--recap-now", action="store_true", help="also post the weekly recap on this run")
     args = parser.parse_args()
 
     webhook = os.environ.get("DISCORD_WEBHOOK_URL", "").strip()
@@ -380,7 +554,7 @@ def main():
             sys.exit("DISCORD_WEBHOOK_URL is not set.")
         post_to_discord(webhook, [{
             "title": "Tracker connected ✅",
-            "description": "Progress updates will be posted in this channel every 30 minutes when something changes.",
+            "description": "Progress updates will be posted in this channel when something changes.",
             "color": DEFAULT_COLOR,
         }])
         print("Test message sent.")
@@ -403,6 +577,9 @@ def main():
     state = load_json(STATE_PATH, {"characters": {}, "group": {}})
     state.setdefault("characters", {})
     state.setdefault("group", {})
+    owners = state.setdefault("owners", {})
+    weekly = state.setdefault("weekly", {})
+    weekly.setdefault("baseline", {})
 
     token = get_token(client_id, client_secret)
     embeds, newly_tracked, unavailable = [], [], []
@@ -419,8 +596,10 @@ def main():
     with ThreadPoolExecutor(max_workers=8) as pool:
         results = list(pool.map(check, characters))
 
+    keyed = []
     for c, (snap, err) in zip(characters, results):
         key = f"{c.get('region', default_region).lower()}:{char_slug(c)}"
+        keyed.append((c, key))
         if err:
             print(f"[warn] {display_name(c)}: {err}")
             continue
@@ -429,17 +608,35 @@ def main():
             continue
 
         old = state["characters"].get(key)
+        lines = []
         if old is None:
             newly_tracked.append(f"{display_name(c)}: level {snap.get('level') or '?'}")
         else:
             lines = find_changes(key, old, snap, settings, state["group"])
-            if lines:
-                embeds.append(character_embed(c, snap, lines))
+
+        # Mounts are account-wide: track them per friend, so a new mount is
+        # posted once (on whichever character saw it first), not once per alt.
+        mounts = snap.pop("_mounts", None)
+        if mounts is not None:
+            owner_key = (c.get("owner") or key).lower()
+            known = owners.setdefault(owner_key, {}).get("mounts")
+            if known is None or old is None:
+                owners[owner_key]["mounts"] = {**(known or {}), **mounts}
+            else:
+                for mid, mname in sorted(mounts.items(), key=lambda kv: kv[1]):
+                    if mid not in known:
+                        lines.append(f"🐎 New mount: **{mname}**")
+                        known[mid] = mname
+
+        if lines:
+            embeds.append(character_embed(c, snap, lines))
+        merge_gear(old, snap)
         state["characters"][key] = keep_baselines(old, snap)
+        weekly["baseline"].setdefault(key, recap_summary(state["characters"][key]))
 
     if unavailable:
         print("[info] No Blizzard data yet for: " + ", ".join(unavailable))
-        print("       (Character lookup may not be live for Forever yet, or the name is misspelled.)")
+        print("       (They show up after the character logs into the world once.)")
 
     if newly_tracked:
         embeds.insert(0, {
@@ -448,13 +645,26 @@ def main():
             "color": DEFAULT_COLOR,
         })
 
+    # Weekly recap: posted by the first run after the recap time.
+    now = datetime.now(timezone.utc)
+    recap_due_at = last_recap_time(now, settings)
+    last = weekly.get("last_recap")
+    if last is None and not args.recap_now:
+        # First run with recaps enabled: start counting from now, recap next week.
+        weekly["last_recap"] = now.isoformat()
+    elif settings["weekly_recap"] and (args.recap_now or datetime.fromisoformat(last) < recap_due_at):
+        recap = build_recap(keyed, state, settings, recap_due_at if not args.recap_now else now.astimezone(local_zone(settings)))
+        if recap:
+            embeds.append(recap)
+        reset_recap_baseline(keyed, state, now)
+
     if args.dry_run:
         print(json.dumps(embeds, indent=2, ensure_ascii=False) if embeds else "[dry run] Nothing to post.")
         return
 
     if embeds:
         post_to_discord(webhook, embeds)
-        print(f"Posted updates for {len(embeds)} character(s).")
+        print(f"Posted {len(embeds)} update(s).")
     else:
         print("No changes since the last check.")
 
