@@ -83,8 +83,16 @@ def main():
         ("/equipment", "equipment"),
         ("/statistics", "statistics"),
         ("/reputations", "reputations"),
+        ("/collections/mounts", "mounts"),
+        ("/collections", "collections index"),
     ]:
         s, b = get(region, working + suffix, token, ns)
+        if s == 200 and suffix in ("/equipment", "/collections/mounts"):
+            import json as _json
+            items = (b or {}).get("equipped_items") or (b or {}).get("mounts") or []
+            print(f"      {len(items)} entries; first two:")
+            for it in items[:2]:
+                print("      " + _json.dumps(it)[:600])
         note = ""
         if s == 200 and suffix == "/professions":
             note = str(t.parse_professions(b))
