@@ -1,4 +1,32 @@
 {
-  "characters": {},
+  "characters": {
+    "us:hefe-weizenson": {
+      "achievements": {},
+      "class": "Paladin",
+      "dungeons": {},
+      "level": 14,
+      "professions": {
+        "Blacksmithing": 42,
+        "Cooking": 5,
+        "Fishing": 1,
+        "Mining": 68
+      },
+      "race": "Dwarf",
+      "raids": {}
+    },
+    "us:tired-mexican": {
+      "achievements": {},
+      "class": "Hunter",
+      "dungeons": {},
+      "level": 12,
+      "professions": {
+        "Cooking": 1,
+        "Engineering": 20,
+        "Mining": 27
+      },
+      "race": "Dwarf",
+      "raids": {}
+    }
+  },
   "group": {}
 }
