@@ -7,10 +7,10 @@
       "gear": {},
       "level": 14,
       "professions": {
-        "Blacksmithing": 50,
+        "Blacksmithing": 70,
         "Cooking": 5,
         "Fishing": 1,
-        "Mining": 68
+        "Mining": 77
       },
       "race": "Dwarf",
       "raids": {}
