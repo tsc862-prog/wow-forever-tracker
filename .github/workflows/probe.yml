@@ -1,0 +1,23 @@
+name: Check Blizzard API
+
+on:
+  workflow_dispatch:
+    inputs:
+      character:
+        description: "A character that has logged in (both name parts, e.g. Erlyn Farthing)"
+        required: true
+      region:
+        description: "Region"
+        default: "us"
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check what Blizzard returns for WoW Forever
+        env:
+          BLIZZARD_CLIENT_ID: ${{ secrets.BLIZZARD_CLIENT_ID }}
+          BLIZZARD_CLIENT_SECRET: ${{ secrets.BLIZZARD_CLIENT_SECRET }}
+        run: python3 probe.py "${{ inputs.character }}" "${{ inputs.region }}"

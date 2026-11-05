@@ -328,7 +328,12 @@ def character_embed(c, snap, lines):
 
 def post_to_discord(webhook, embeds, content=None):
     for i in range(0, len(embeds), 10):  # Discord allows 10 embeds per message
-        payload = {"username": "WoW: Forever Tracker", "embeds": embeds[i:i + 10]}
+        payload = {
+            "username": "WoW: Forever Tracker",
+            "embeds": embeds[i:i + 10],
+            "flags": 4096,                      # @silent: no push/desktop alerts for anyone
+            "allowed_mentions": {"parse": []},  # never ping users, roles or @everyone
+        }
         if content and i == 0:
             payload["content"] = content
         status, body = http("POST", webhook, {"Content-Type": "application/json"},
