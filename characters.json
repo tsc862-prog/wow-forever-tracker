@@ -25,7 +25,16 @@
       "Revered",
       "Exalted"
     ],
-    "class_emojis": {}
+    "class_emojis": {
+      "druid": "<:druid:1568369898911039538>",
+      "hunter": "<:hunter:1568369941323849758>",
+      "paladin": "<:paladin:1568370017232355529>",
+      "priest": "<:priest:1568370038589624551>",
+      "rogue": "<:rogue:1568370060064587969>",
+      "shaman": "<:shaman:1568370088703299704>",
+      "warlock": "<:warlock:1568370107347116143>",
+      "warrior": "<:warrior:1568370128762961941>"
+    }
   },
   "friends": [
     {
