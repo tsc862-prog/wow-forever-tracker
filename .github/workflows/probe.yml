@@ -21,4 +21,5 @@ jobs:
           BLIZZARD_CLIENT_ID: ${{ secrets.BLIZZARD_CLIENT_ID }}
           BLIZZARD_CLIENT_SECRET: ${{ secrets.BLIZZARD_CLIENT_SECRET }}
           PROBE_RAW: "1"
+          PROBE_ALL_STATS: "1"
         run: python3 probe.py "${{ inputs.character }}" "${{ inputs.region }}"

@@ -115,7 +115,7 @@ def main():
             for cat in cats or []:
                 here = f"{path}/{t.name_of(cat)}"
                 for st in cat.get("statistics") or []:
-                    if st.get("quantity"):
+                    if st.get("quantity") or os.environ.get("PROBE_ALL_STATS"):
                         print(f"   {here} :: {t.name_of(st) or st.get('description')} = {st.get('quantity')}  (id {st.get('id')})")
                 walk(cat.get("sub_categories"), here)
         if s == 200 and isinstance(b, dict):
