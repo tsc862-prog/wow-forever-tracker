@@ -582,16 +582,29 @@ def keep_baselines(old, new):
     return new
 
 
-def character_embed(c, snap, lines):
+def emoji_image_url(snap, settings):
+    """Image address of the character's class emoji, e.g. for a card's author icon."""
+    code = (settings.get("class_emojis") or {}).get((snap.get("class") or "").lower()) or ""
+    match = re.match(r"<a?:\w+:(\d+)>", code)
+    return f"https://cdn.discordapp.com/emojis/{match.group(1)}.png" if match else None
+
+
+def character_embed(c, snap, lines, settings=None):
     if len(lines) > 25:  # keep long catch-up posts readable
         lines = lines[:24] + [f"…and {len(lines) - 24} more"]
     describe = " ".join(str(x) for x in (snap.get("race"), snap.get("class")) if x)
+    footer = f"Level {snap.get('level') or '?'} {describe}".strip()
+    if c.get("owner"):
+        footer += f" · {c['owner']}"
+    author = {"name": display_name(c), "url": armory_url(c)}
+    icon = emoji_image_url(snap, settings or {})
+    if icon:
+        author["icon_url"] = icon
     return {
-        "title": display_name(c),
-        "url": armory_url(c),
+        "author": author,
         "description": "\n".join(lines),
         "color": CLASS_COLORS.get(snap.get("class"), DEFAULT_COLOR),
-        "footer": {"text": f"Level {snap.get('level') or '?'} {describe}".strip()},
+        "footer": {"text": footer},
     }
 
 
@@ -944,7 +957,7 @@ def main():
                         known[mid] = mname
 
         if lines:
-            embeds.append(character_embed(c, snap, lines))
+            embeds.append(character_embed(c, snap, lines, settings))
         merge_gear(old, snap)
         state["characters"][key] = keep_baselines(old, snap)
         weekly["baseline"].setdefault(key, recap_summary(state["characters"][key]))
