@@ -107,6 +107,28 @@ def main():
             note = f"{len(t.parse_achievements(b) or {})} completed"
         show(label, s, b, note)
 
+    if os.environ.get("PROBE_RAW"):
+        print("\n== Statistics with a value ==")
+        s, b = get(region, working + "/achievements/statistics", token, ns)
+        print(f"   HTTP {s}")
+        def walk(cats, path=""):
+            for cat in cats or []:
+                here = f"{path}/{t.name_of(cat)}"
+                for st in cat.get("statistics") or []:
+                    if st.get("quantity"):
+                        print(f"   {here} :: {t.name_of(st) or st.get('description')} = {st.get('quantity')}  (id {st.get('id')})")
+                walk(cat.get("sub_categories"), here)
+        if s == 200 and isinstance(b, dict):
+            walk(b.get("categories"))
+        print("\n== All achievements (done or in progress) ==")
+        s, b = get(region, working + "/achievements", token, ns)
+        for a in (b or {}).get("achievements") or []:
+            print(f"   {'DONE' if a.get('completed_timestamp') else '....'} {a.get('id')} {t.name_of(a.get('achievement'))}")
+        for cp in (b or {}).get("category_progress") or []:
+            print(f"   category: {t.name_of(cp.get('category'))} quantity={cp.get('quantity')} points={cp.get('points')}")
+        for ev in (b or {}).get("recent_events") or []:
+            print(f"   recent: {t.name_of(ev.get('achievement'))} at {ev.get('timestamp')}")
+
     print(f"\n✅ Character lookup works. If the path above isn't the realmless one, "
           f"add  \"api_path\": \"{working}\"  to that character in characters.json.")
 
