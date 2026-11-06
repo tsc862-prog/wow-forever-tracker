@@ -21,11 +21,11 @@
       "gear": {},
       "level": 19,
       "professions": {
-        "Blacksmithing": 94,
+        "Blacksmithing": 100,
         "Cooking": 75,
         "First Aid": 14,
         "Fishing": 1,
-        "Mining": 112
+        "Mining": 115
       },
       "race": "Dwarf",
       "raids": {},
