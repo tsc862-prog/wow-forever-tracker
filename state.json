@@ -4,6 +4,18 @@
       "achievements": {
         "779": "Explore Loch Modan"
       },
+      "boss_kills": {
+        "15027": {
+          "boss": "Bazzalan",
+          "count": 1,
+          "instance": "Ragefire Chasm"
+        },
+        "63573": {
+          "boss": "Durgen Dirgehammer",
+          "count": 1,
+          "instance": "Hall of Thanes"
+        }
+      },
       "class": "Paladin",
       "dungeons": {},
       "gear": {},
@@ -21,6 +33,18 @@
     "us:tired-mexican": {
       "achievements": {
         "779": "Explore Loch Modan"
+      },
+      "boss_kills": {
+        "15027": {
+          "boss": "Bazzalan",
+          "count": 1,
+          "instance": "Ragefire Chasm"
+        },
+        "63573": {
+          "boss": "Durgen Dirgehammer",
+          "count": 1,
+          "instance": "Hall of Thanes"
+        }
       },
       "class": "Hunter",
       "dungeons": {},
