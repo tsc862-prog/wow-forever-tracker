@@ -9,7 +9,7 @@ Discord message with everything that changed since then:
   - level-ups (and who was first to max level)
   - professions learned, and profession skill milestones
   - dungeons cleared for the first time
-  - raid bosses killed for the first time, and full raid clears
+  - dungeon and raid bosses killed for the first time (from boss-kill statistics)
   - achievements earned
   - gear: every new epic/legendary equipped, and a character's first blue
   - mounts: new mounts (mounts are account-wide, so posted once per friend)
@@ -39,6 +39,7 @@ import argparse
 import base64
 import json
 import os
+import re
 import sys
 import urllib.error
 import urllib.parse
@@ -253,6 +254,38 @@ def parse_mounts(body):
     return out
 
 
+BOSS_KILL_STAT = re.compile(r"^(?P<boss>.+?)\s+kills\s*\((?P<instance>.+)\)\s*$", re.IGNORECASE)
+
+
+def parse_boss_kills(body):
+    """
+    {statistic id: {"boss", "instance", "count"}} for every boss the character
+    has killed at least once, read from the "Boss Kills" statistics
+    (e.g. "Bazzalan kills (Ragefire Chasm)"). Forever doesn't fill in the
+    dungeon/raid encounter data, but it does keep these kill counts.
+    """
+    if not isinstance(body, dict):
+        return None
+    out = {}
+
+    def walk(categories, in_boss_kills=False):
+        for cat in categories or []:
+            boss_cat = in_boss_kills or "boss kills" in (name_of(cat) or "").lower()
+            for stat in cat.get("statistics") or []:
+                qty = stat.get("quantity") or 0
+                match = BOSS_KILL_STAT.match(name_of(stat) or "")
+                if qty > 0 and match and (boss_cat or "kills (" in (name_of(stat) or "").lower()):
+                    out[str(stat.get("id"))] = {
+                        "boss": match.group("boss").strip(),
+                        "instance": match.group("instance").strip(),
+                        "count": int(qty),
+                    }
+            walk(cat.get("sub_categories"), boss_cat)
+
+    walk(body.get("categories"))
+    return out
+
+
 def fetch_snapshot(c, region, token, namespace, settings):
     """Return the character's current snapshot, or None if Blizzard has no data."""
     for path in candidate_paths(c):
@@ -283,6 +316,8 @@ def fetch_snapshot(c, region, token, namespace, settings):
             snap["raids"] = sub("/encounters/raids", parse_encounters)
         if settings["track_achievements"]:
             snap["achievements"] = sub("/achievements", parse_achievements)
+        if settings["track_dungeons"] or settings["track_raids"]:
+            snap["boss_kills"] = sub("/achievements/statistics", parse_boss_kills)
         if settings["track_gear"]:
             snap["_equipped"] = sub("/equipment", parse_equipment)
         if settings["track_mounts"]:
@@ -346,6 +381,15 @@ def find_changes(key, old, new, settings, group):
                     if boss not in before["bosses"]:
                         lines.append(f"⚔️ First kill: **{boss}** ({inst})")
 
+    # Boss kills (dungeons and raids). Characters tracked before this feature
+    # existed have no saved kills yet, so their current kills post once.
+    new_k = new.get("boss_kills")
+    if new_k is not None:
+        old_k = old.get("boss_kills") or {}
+        fresh = [k for k in new_k if k not in old_k]
+        for k in sorted(fresh, key=lambda k: (new_k[k]["instance"], new_k[k]["boss"])):
+            lines.append(f"⚔️ First kill: **{new_k[k]['boss']}** ({new_k[k]['instance']})")
+
     # Achievements
     old_a, new_a = old.get("achievements"), new.get("achievements")
     if old_a is not None and new_a is not None:
@@ -388,7 +432,7 @@ def merge_gear(old, new):
 
 def keep_baselines(old, new):
     """If a feature failed to load this run, keep last run's data for it."""
-    for field in ("professions", "dungeons", "raids", "achievements"):
+    for field in ("professions", "dungeons", "raids", "achievements", "boss_kills"):
         if new.get(field) is None and old and old.get(field) is not None:
             new[field] = old[field]
     return new
@@ -434,7 +478,9 @@ def recap_summary(snap):
     return {
         "level": snap.get("level") or 0,
         "dungeons": sorted(k for k, v in (snap.get("dungeons") or {}).items() if v.get("cleared")),
-        "bosses": sorted(f"{i}|{b}" for i, v in (snap.get("raids") or {}).items() for b in v.get("bosses", [])),
+        "bosses": sorted(set(
+            [f"{i}|{b}" for i, v in (snap.get("raids") or {}).items() for b in v.get("bosses", [])]
+            + [f"{v['instance']}|{v['boss']}" for v in (snap.get("boss_kills") or {}).values()])),
         "epics": sorted(k for k, v in (snap.get("gear") or {}).items()
                         if QUALITY_RANK.get(v.get("quality"), 0) >= QUALITY_RANK["EPIC"]),
         "professions": dict(snap.get("professions") or {}),
