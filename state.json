@@ -7,28 +7,36 @@
       "class": "Paladin",
       "dungeons": {},
       "gear": {},
-      "level": 15,
+      "level": 19,
       "professions": {
-        "Blacksmithing": 80,
-        "Cooking": 14,
+        "Blacksmithing": 94,
+        "Cooking": 17,
+        "First Aid": 1,
         "Fishing": 1,
-        "Mining": 96
+        "Mining": 108
       },
       "race": "Dwarf",
       "raids": {}
     },
     "us:tired-mexican": {
-      "achievements": {},
+      "achievements": {
+        "779": "Explore Loch Modan"
+      },
       "class": "Hunter",
       "dungeons": {},
-      "gear": {},
-      "level": 15,
+      "gear": {
+        "12988": {
+          "name": "Starsight Tunic",
+          "quality": "RARE"
+        }
+      },
+      "level": 19,
       "professions": {
         "Cooking": 2,
-        "Engineering": 91,
+        "Engineering": 101,
         "First Aid": 1,
         "Fishing": 20,
-        "Mining": 94
+        "Mining": 101
       },
       "race": "Dwarf",
       "raids": {}
