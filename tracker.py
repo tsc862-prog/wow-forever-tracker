@@ -445,6 +445,12 @@ def fetch_snapshot(c, region, token, namespace, settings):
 
 # ---------------------------------------------------------------- Changes
 
+def armory_url(c, region="us"):
+    """The character's page on Blizzard's WoW: Forever Armory."""
+    region = (c.get("region") or region).lower()
+    return f"https://worldofwarcraft.blizzard.com/en-us/forever/{region}/armory/character/{char_slug(c)}"
+
+
 def display_name(c):
     """Full character name, e.g. "Hefe Weizenson"."""
     return " ".join(p for p in (c["name"], c.get("surname")) if p)
@@ -582,6 +588,7 @@ def character_embed(c, snap, lines):
     describe = " ".join(str(x) for x in (snap.get("race"), snap.get("class")) if x)
     return {
         "title": display_name(c),
+        "url": armory_url(c),
         "description": "\n".join(lines),
         "color": CLASS_COLORS.get(snap.get("class"), DEFAULT_COLOR),
         "footer": {"text": f"Level {snap.get('level') or '?'} {describe}".strip()},
@@ -697,11 +704,11 @@ def build_recap(characters, state, settings, week_end, launch_week):
         played = (week["levels"] or now_s["xp"] != base.get("xp", now_s["xp"]) or week["mobs"]
                   or week["quests"] or week["deaths"] or week["crafter"] or week["clears"])
         if played:
-            active.append((display_name(c), emoji_for(snap, settings), snap, now_s, week))
+            active.append((display_name(c), emoji_for(snap, settings), snap, now_s, week, armory_url(c)))
     if not active:
         return None
 
-    def who(a):
+    def who(a):  # class icon + name (scoreboard, awards)
         return f"{a[1]}{a[0]}"
 
     # 1. Headline + leaderboard
@@ -718,11 +725,11 @@ def build_recap(characters, state, settings, week_end, launch_week):
         mark = medals[i] if i < 3 else f"`{i + 1}.`"
         spec = " ".join(x for x in (a[2].get("spec"), a[2].get("class")) if x)
         gain = f" **+{a[4]['levels']}**" if a[4]["levels"] else ""
-        lines.append(f"{mark} {a[1]}**{a[0]}** Lv {a[3]['level']}{gain}" + (f" · {spec}" if spec else ""))
+        lines.append(f"{mark} {a[1]}**[{a[0]}]({a[5]})** Lv {a[3]['level']}{gain}" + (f" · {spec}" if spec else ""))
     if len(leveling) > 15:
         lines.append(f"…and {len(leveling) - 15} more")
     if capped:
-        lines.append(f"⭐ **At {max_level}:** " + " · ".join(who(a) for a in capped))
+        lines.append(f"⭐ **At {max_level}:** " + " · ".join(f"{a[1]}[{a[0]}]({a[5]})" for a in capped))
     week_start = week_end - timedelta(days=6)
     embeds = [{
         "title": f"📅 Weekly Recap · {week_start.strftime('%b %-d')} – {week_end.strftime('%b %-d')}",
@@ -738,7 +745,7 @@ def build_recap(characters, state, settings, week_end, launch_week):
             by_dungeon.setdefault(d, []).append((a, n))
     if by_dungeon:
         order = sorted(by_dungeon, key=lambda d: (-sum(n for _, n in by_dungeon[d]), d))
-        rows = [f"**{d}** · " + ", ".join(f"{who(a)}" + (f" ×{n}" if n > 1 else "")
+        rows = [f"**{d}** · " + ", ".join(a[0] + (f" ×{n}" if n > 1 else "")
                                           for a, n in sorted(by_dungeon[d], key=lambda x: -x[1]))
                 for d in order[:6]]
         if len(order) > 6:
@@ -747,12 +754,12 @@ def build_recap(characters, state, settings, week_end, launch_week):
     epics = [(a, a[2]["gear"][e]["name"]) for a in active for e in a[4]["_new_epics"] if e in (a[2].get("gear") or {})]
     if epics:
         fields.append({"name": "🟣 Epics this week",
-                       "value": "\n".join(f"**{name}** · {who(a)}" for a, name in epics[:8])[:1024], "inline": False})
+                       "value": "\n".join(f"**{name}** · {a[0]}" for a, name in epics[:8])[:1024], "inline": False})
     prof_rows = []
     for a in sorted(active, key=lambda a: -a[4]["crafter"]):
         gains = sorted(a[4]["_prof_gains"].items(), key=lambda kv: -kv[1])[:3]
         if gains:
-            prof_rows.append(f"{a[1]}**{a[0]}**: " + " · ".join(
+            prof_rows.append(f"**{a[0]}**: " + " · ".join(
                 f"{p} {a[3]['professions'][p]} **+{g}**" for p, g in gains))
     if prof_rows:
         fields.append({"name": "🛠️ Professions this week", "value": "\n".join(prof_rows[:10])[:1024], "inline": False})
