@@ -10,7 +10,7 @@ Every 30 minutes, checks your group's WoW: Forever characters and posts one Disc
 - 🟣 Every new epic equipped, and 🔵 each character's first blue
 - 🤝 Reputation milestones: Honored, Revered, and 👑 Exalted
 - 🐎 New mounts (once per friend, since mounts are account-wide)
-- 📅 A weekly recap leaderboard every Sunday evening (first run after 7 pm Pacific)
+- 📅 A weekly recap every Sunday evening (first run after 7 pm Pacific): leaderboard, dungeon clears, epics, profession gains, a top-3 scoreboard for mobs/quests/deaths, and six rotating awards
 
 If nothing changed, it posts nothing. Each character with news gets its own card, colored by class.
 
@@ -71,6 +71,7 @@ Then run it once more without the box ticked. The first check posts a "Now track
 | `track_gear`, `track_mounts`, `track_reputation`, `weekly_recap` | Set to `false` to turn off gear, mount or recap posts |
 | `recap_day`, `recap_hour`, `timezone` | When the weekly recap is posted |
 | `reputation_milestones` | Standings that get announced |
+| `class_emojis` | Optional server emoji per class, e.g. `"paladin": "<:class_paladin:123…>"`. Shown before names in the recap |
 | `max_level` | Level cap (60) |
 
 ## If nothing shows up

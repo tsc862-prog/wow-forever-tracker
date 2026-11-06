@@ -17,8 +17,9 @@ Discord message with everything that changed since then:
   - mounts: new mounts (mounts are account-wide, so posted once per friend)
 
 Once a week (Sunday evening by default) the first run after the recap time
-also posts a weekly recap: a leaderboard with each character's progress
-since the last recap.
+also posts a weekly recap as its own message: a leaderboard of characters who
+played, highlights (dungeon clears, epics, profession gains), a top-3
+scoreboard (mobs, quests, deaths) and six rotating awards.
 
 Anything a character already had when it was first tracked is recorded
 quietly, so only new progress gets posted. All posts are silent (no
@@ -89,6 +90,7 @@ DEFAULT_SETTINGS = {
     "recap_day": "sunday",
     "recap_hour": 19,
     "timezone": "America/Los_Angeles",
+    "class_emojis": {},
 }
 
 
@@ -337,6 +339,49 @@ def cleared_dungeons(snap):
     return sorted(out)
 
 
+# Statistics the weekly recap compares (Blizzard statistic id -> our name).
+RECAP_STATS = {
+    "60": "deaths", "98": "quests", "107": "mobs", "108": "critters",
+    "1487": "killing_blows", "353": "hearths", "349": "flights",
+    "345": "health_potions", "922": "mana_potions", "346": "drinks", "347": "food",
+    "1044": "need_rolls", "588": "honorable_kills",
+}
+
+
+def parse_statistics(body):
+    """
+    ({recap stat name: value}, {boss kills}) from one statistics response.
+    Blizzard leaves out statistics that are still zero.
+    """
+    if not isinstance(body, dict):
+        return None, None
+    stats = {}
+
+    def walk(categories):
+        for cat in categories or []:
+            for stat in cat.get("statistics") or []:
+                name = RECAP_STATS.get(str(stat.get("id")))
+                if name and isinstance(stat.get("quantity"), (int, float)):
+                    stats[name] = int(stat["quantity"])
+            walk(cat.get("sub_categories"))
+
+    walk(body.get("categories"))
+    return stats, parse_boss_kills(body)
+
+
+def parse_spec(body):
+    """Name of the active talent specialization, e.g. "Protection"."""
+    if not isinstance(body, dict):
+        return None
+    for group in body.get("specialization_groups") or []:
+        if group.get("is_active"):
+            for spec in group.get("specializations") or []:
+                name = spec.get("specialization_name") or name_of(spec.get("specialization"))
+                if name:
+                    return name
+    return None
+
+
 def parse_reputations(body):
     """{faction name: {"tier": n, "name": "Honored"}}. Higher tier = better standing."""
     if not isinstance(body, dict):
@@ -346,7 +391,8 @@ def parse_reputations(body):
         faction = name_of(r.get("faction"))
         standing = r.get("standing") or {}
         if faction and isinstance(standing.get("tier"), int):
-            out[faction] = {"tier": standing["tier"], "name": standing.get("name") or ""}
+            out[faction] = {"tier": standing["tier"], "name": standing.get("name") or "",
+                            "raw": standing.get("raw") if isinstance(standing.get("raw"), int) else None}
     return out
 
 
@@ -366,6 +412,7 @@ def fetch_snapshot(c, region, token, namespace, settings):
             "level": body.get("level"),
             "class": name_of(body.get("character_class")),
             "race": name_of(body.get("race")),
+            "xp": body.get("experience") if isinstance(body.get("experience"), int) else 0,
         }
 
         def sub(suffix, parser):
@@ -380,8 +427,12 @@ def fetch_snapshot(c, region, token, namespace, settings):
             snap["raids"] = sub("/encounters/raids", parse_encounters)
         if settings["track_achievements"]:
             snap["achievements"] = sub("/achievements", parse_achievements)
+        s_status, s_body = api_get(region, f"{path}/achievements/statistics", token, namespace)
+        stats, kills = parse_statistics(s_body) if s_status == 200 else (None, None)
+        snap["stats"] = stats
         if settings["track_dungeons"] or settings["track_raids"]:
-            snap["boss_kills"] = sub("/achievements/statistics", parse_boss_kills)
+            snap["boss_kills"] = kills
+        snap["spec"] = sub("/specializations", parse_spec)
         if settings["track_gear"]:
             snap["_equipped"] = sub("/equipment", parse_equipment)
         if settings["track_mounts"]:
@@ -395,8 +446,8 @@ def fetch_snapshot(c, region, token, namespace, settings):
 # ---------------------------------------------------------------- Changes
 
 def display_name(c):
-    full = " ".join(p for p in (c["name"], c.get("surname")) if p)
-    return f"{full} ({c['owner']})" if c.get("owner") else full
+    """Full character name, e.g. "Hefe Weizenson"."""
+    return " ".join(p for p in (c["name"], c.get("surname")) if p)
 
 
 def find_changes(key, old, new, settings, group):
@@ -518,7 +569,8 @@ def merge_gear(old, new):
 
 def keep_baselines(old, new):
     """If a feature failed to load this run, keep last run's data for it."""
-    for field in ("professions", "dungeons", "raids", "achievements", "boss_kills", "reputations"):
+    for field in ("professions", "dungeons", "raids", "achievements", "boss_kills", "reputations",
+                  "stats", "spec"):
         if new.get(field) is None and old and old.get(field) is not None:
             new[field] = old[field]
     return new
@@ -560,68 +612,186 @@ def last_recap_time(now, settings):
 
 
 def recap_summary(snap):
-    """The numbers a weekly recap compares."""
+    """The numbers a weekly recap compares, saved as last week's baseline."""
+    kills = {}
+    for sid, kill in (snap.get("boss_kills") or {}).items():
+        if sid in DUNGEONS.ignore:
+            continue
+        kind, dungeon = DUNGEONS.classify(kill)
+        if kind == "clear":
+            kills[dungeon] = kills.get(dungeon, 0) + int(kill.get("count") or 0)
     return {
         "level": snap.get("level") or 0,
-        "dungeons": sorted(set(cleared_dungeons(snap)) |
-                           {k for k, v in (snap.get("dungeons") or {}).items() if v.get("cleared")}),
-        "bosses": sorted(set(
-            [f"{i}|{b}" for i, v in (snap.get("raids") or {}).items() for b in v.get("bosses", [])]
-            + [f"{v['instance']}|{v['boss']}" for sid, v in (snap.get("boss_kills") or {}).items()
-               if sid not in DUNGEONS.ignore and DUNGEONS.classify(v)[0] == "boss"])),
+        "xp": snap.get("xp") or 0,
+        "stats": dict(snap.get("stats") or {}),
+        "professions": dict(snap.get("professions") or {}),
+        "clears": kills,
         "epics": sorted(k for k, v in (snap.get("gear") or {}).items()
                         if QUALITY_RANK.get(v.get("quality"), 0) >= QUALITY_RANK["EPIC"]),
-        "professions": dict(snap.get("professions") or {}),
+        "rep": {f: r.get("raw") or 0 for f, r in (snap.get("reputations") or {}).items()},
+        "achievements": len(snap.get("achievements") or {}),
     }
 
 
-def build_recap(characters, state, settings, week_start):
+LAUNCH_BASELINE = {"level": 1, "xp": 0, "stats": {}, "professions": {}, "clears": {},
+                   "epics": [], "rep": {}, "achievements": 0}
+
+# Rotating awards: (key, title, unit, how to compute the week's number from now/base summaries)
+AWARDS = [
+    ("killing_blows", "🗡️ Most Dangerous", ("killing blow", "killing blows"), None),
+    ("crafter", "⚒️ Master Crafter", ("profession skill", "profession skill"), None),
+    ("hearths", "🏠 Homebody", ("hearth", "hearths"), None),
+    ("potions", "🧪 Potion Addict", ("potion", "potions"), None),
+    ("need_rolls", "🎲 Need-Roll Ninja", ("need roll", "need rolls"), None),
+    ("flights", "✈️ Frequent Flyer", ("flight", "flights"), None),
+    ("snacks", "🍖 Snack Break", ("food & drink", "food & drinks"), None),
+    ("critters", "🐿️ Critter Menace", ("critter", "critters"), None),
+    ("honorable_kills", "⚔️ Gladiator", ("honorable kill", "honorable kills"), None),
+    ("rep", "🤝 Diplomat", ("reputation", "reputation"), None),
+    ("achievements", "🎖️ Achiever", ("achievement", "achievements"), None),
+    ("clears", "🏰 Dungeon Crawler", ("dungeon clear", "dungeon clears"), None),
+]
+
+
+def week_numbers(now_s, base):
+    """Everything this character did this week, as {name: amount}."""
+    def stat(name):
+        return max(0, (now_s["stats"].get(name) or 0) - (base["stats"].get(name) or 0))
+    prof_gains = {p: v - (base["professions"].get(p) or 0) for p, v in now_s["professions"].items()}
+    clears = {d: n - (base["clears"].get(d) or 0) for d, n in now_s["clears"].items()}
+    out = {name: stat(name) for name in RECAP_STATS.values()}
+    out.update({
+        "levels": max(0, now_s["level"] - base["level"]),
+        "potions": stat("health_potions") + stat("mana_potions"),
+        "snacks": stat("food") + stat("drinks"),
+        "crafter": sum(g for g in prof_gains.values() if g > 0),
+        "rep": sum(max(0, raw - (base["rep"].get(f) or 0)) for f, raw in now_s["rep"].items()),
+        "achievements": max(0, now_s["achievements"] - base["achievements"]),
+        "clears": sum(n for n in clears.values() if n > 0),
+        "_prof_gains": {p: g for p, g in prof_gains.items() if g > 0},
+        "_clears": {d: n for d, n in clears.items() if n > 0},
+        "_new_epics": [e for e in now_s["epics"] if e not in set(base["epics"])],
+    })
+    return out
+
+
+def emoji_for(snap, settings):
+    code = (settings.get("class_emojis") or {}).get((snap.get("class") or "").lower())
+    return f"{code} " if code else ""
+
+
+def build_recap(characters, state, settings, week_end, launch_week):
+    """The weekly recap as a list of Discord embeds, or None if nobody played."""
     weekly = state.setdefault("weekly", {})
     baseline = weekly.setdefault("baseline", {})
-    rows, total_levels = [], 0
+    max_level = settings["max_level"]
 
+    active = []  # (name, icon, snap, now_s, week)
     for c, key in characters:
         snap = state["characters"].get(key)
         if not snap:
             continue
         now_s = recap_summary(snap)
-        base = baseline.get(key) or now_s
-        gained = now_s["level"] - base["level"]
-        total_levels += max(gained, 0)
-
-        extras = []
-        new_dungeons = len(set(now_s["dungeons"]) - set(base["dungeons"]))
-        new_bosses = len(set(now_s["bosses"]) - set(base["bosses"]))
-        new_epics = len(set(now_s["epics"]) - set(base["epics"]))
-        if new_dungeons:
-            extras.append(f"🗝️ {new_dungeons} dungeon{'s' * (new_dungeons > 1)}")
-        if new_bosses:
-            extras.append(f"⚔️ {new_bosses} boss{'es' * (new_bosses > 1)}")
-        if new_epics:
-            extras.append(f"🟣 {new_epics} epic{'s' * (new_epics > 1)}")
-        profs = sorted(now_s["professions"].items(), key=lambda kv: -kv[1])
-        prof_text = ", ".join(f"{p} {s}" for p, s in profs if s > 1)[:120]
-
-        line = f"**{display_name(c)}**: Lv {now_s['level']}"
-        line += f" (+{gained})" if gained > 0 else " (no change)"
-        if extras:
-            line += " · " + " · ".join(extras)
-        if prof_text:
-            line += f"\n  {prof_text}"
-        rows.append((now_s["level"], gained, line))
-
-    if not rows:
+        base = LAUNCH_BASELINE if launch_week else {**LAUNCH_BASELINE, **(baseline.get(key) or now_s)}
+        week = week_numbers(now_s, base)
+        played = (week["levels"] or now_s["xp"] != base.get("xp", now_s["xp"]) or week["mobs"]
+                  or week["quests"] or week["deaths"] or week["crafter"] or week["clears"])
+        if played:
+            active.append((display_name(c), emoji_for(snap, settings), snap, now_s, week))
+    if not active:
         return None
-    rows.sort(key=lambda r: (-r[1], -r[0]))  # most levels gained this week first
+
+    def who(a):
+        return f"{a[1]}{a[0]}"
+
+    # 1. Headline + leaderboard
+    total = lambda k: sum(a[4][k] for a in active)
+    plural = lambda n, word: f"{n:,} {word}{'' if n == 1 else 's'}"
+    headline = (f"The group gained **{plural(total('levels'), 'level')}**, killed **{plural(total('mobs'), 'mob')}**, "
+                f"finished **{plural(total('quests'), 'quest')}**, and died **{plural(total('deaths'), 'time')}**.")
+    leveling = [a for a in active if a[3]["level"] < max_level or a[4]["levels"] > 0]
+    capped = [a for a in active if a not in leveling]
+    leveling.sort(key=lambda a: (-a[4]["levels"], -a[3]["level"], -a[3]["xp"]))
     medals = ["🥇", "🥈", "🥉"]
-    body = "\n".join(
-        f"{medals[i] if i < 3 and r[1] > 0 else '•'} {r[2]}" for i, r in enumerate(rows))
-    return {
-        "title": f"📅 Weekly recap: week ending {week_start.strftime('%b %-d')}",
-        "description": body[:4000],
+    lines = []
+    for i, a in enumerate(leveling[:15]):
+        mark = medals[i] if i < 3 else f"`{i + 1}.`"
+        spec = " ".join(x for x in (a[2].get("spec"), a[2].get("class")) if x)
+        gain = f" **+{a[4]['levels']}**" if a[4]["levels"] else ""
+        lines.append(f"{mark} {a[1]}**{a[0]}** Lv {a[3]['level']}{gain}" + (f" · {spec}" if spec else ""))
+    if len(leveling) > 15:
+        lines.append(f"…and {len(leveling) - 15} more")
+    if capped:
+        lines.append(f"⭐ **At {max_level}:** " + " · ".join(who(a) for a in capped))
+    week_start = week_end - timedelta(days=6)
+    embeds = [{
+        "title": f"📅 Weekly Recap · {week_start.strftime('%b %-d')} – {week_end.strftime('%b %-d')}",
+        "description": f"{headline}\n\n**🏆 Leaderboard**\n" + "\n".join(lines),
         "color": RECAP_COLOR,
-        "footer": {"text": f"Group total: +{total_levels} level{'s' * (total_levels != 1)} this week"},
-    }
+    }]
+
+    # 2. Highlights
+    fields = []
+    by_dungeon = {}
+    for a in active:
+        for d, n in a[4]["_clears"].items():
+            by_dungeon.setdefault(d, []).append((a, n))
+    if by_dungeon:
+        order = sorted(by_dungeon, key=lambda d: (-sum(n for _, n in by_dungeon[d]), d))
+        rows = [f"**{d}** · " + ", ".join(f"{who(a)}" + (f" ×{n}" if n > 1 else "")
+                                          for a, n in sorted(by_dungeon[d], key=lambda x: -x[1]))
+                for d in order[:6]]
+        if len(order) > 6:
+            rows.append(f"+{len(order) - 6} more dungeons")
+        fields.append({"name": "🗝️ Dungeons this week", "value": "\n".join(rows)[:1024], "inline": False})
+    epics = [(a, a[2]["gear"][e]["name"]) for a in active for e in a[4]["_new_epics"] if e in (a[2].get("gear") or {})]
+    if epics:
+        fields.append({"name": "🟣 Epics this week",
+                       "value": "\n".join(f"**{name}** · {who(a)}" for a, name in epics[:8])[:1024], "inline": False})
+    prof_rows = []
+    for a in sorted(active, key=lambda a: -a[4]["crafter"]):
+        gains = sorted(a[4]["_prof_gains"].items(), key=lambda kv: -kv[1])[:3]
+        if gains:
+            prof_rows.append(f"{a[1]}**{a[0]}**: " + " · ".join(
+                f"{p} {a[3]['professions'][p]} **+{g}**" for p, g in gains))
+    if prof_rows:
+        fields.append({"name": "🛠️ Professions this week", "value": "\n".join(prof_rows[:10])[:1024], "inline": False})
+    if fields:
+        embeds.append({"title": "✨ Highlights", "color": 0x3498DB, "fields": fields})
+
+    # 3. Scoreboard: top 3 for mobs, quests, deaths
+    score_fields = []
+    for key, title in (("mobs", "⚔️ Mobs killed"), ("quests", "📜 Quests completed"), ("deaths", "💀 Deaths")):
+        ranked = sorted((a for a in active if a[4][key] > 0), key=lambda a: -a[4][key])[:3]
+        if ranked:
+            score_fields.append({"name": title, "inline": False, "value": "\n".join(
+                f"{medals[i]} {who(a)} · **{a[4][key]:,}**" for i, a in enumerate(ranked))})
+    if score_fields:
+        embeds.append({"title": "📊 Scoreboard", "color": 0xE67E22, "fields": score_fields})
+
+    # 4. Awards: the six most lopsided, skipping ties, zeros and last week's picks.
+    # Only when at least two characters played; one player winning everything isn't fun.
+    last_awards = set(weekly.get("last_awards") or [])
+    candidates = []
+    for key, title, unit, _ in (AWARDS if len(active) > 1 else []):
+        ranked = sorted(active, key=lambda a: -a[4][key])
+        top = ranked[0][4][key]
+        second = ranked[1][4][key] if len(ranked) > 1 else 0
+        if top <= 0 or top == second or (key == "rep" and launch_week):
+            continue
+        margin = (top - second) / top
+        candidates.append((margin - (0.5 if key in last_awards else 0), key, title, unit, ranked[0], top))
+    candidates.sort(key=lambda x: -x[0])
+    picks = candidates[:6]
+    if picks:
+        embeds.append({"title": "🏅 Awards", "color": 0x9B59B6, "fields": [
+            {"name": title, "value": f"{who(winner)}\n{top:,} {unit[0] if top == 1 else unit[1]}", "inline": True}
+            for _, _, title, unit, winner, top in picks]})
+    weekly["pending_awards"] = [p[1] for p in picks]
+
+    if launch_week:
+        embeds[-1]["footer"] = {"text": "Launch week · counted from level 1"}
+    return embeds
 
 
 def reset_recap_baseline(characters, state, when):
@@ -629,6 +799,8 @@ def reset_recap_baseline(characters, state, when):
     weekly["baseline"] = {key: recap_summary(state["characters"][key])
                           for _, key in characters if key in state["characters"]}
     weekly["last_recap"] = when.astimezone(timezone.utc).isoformat()
+    weekly["recaps_posted"] = (weekly.get("recaps_posted") or 0) + 1
+    weekly["last_awards"] = weekly.pop("pending_awards", [])
 
 
 # ---------------------------------------------------------------- Discord
@@ -781,21 +953,22 @@ def main():
             "color": DEFAULT_COLOR,
         })
 
-    # Weekly recap: posted by the first run after the recap time.
+    # Weekly recap: posted by the first run after the recap time, as its own message.
     now = datetime.now(timezone.utc)
     recap_due_at = last_recap_time(now, settings)
     last = weekly.get("last_recap")
+    recap = None
     if last is None and not args.recap_now:
         # First run with recaps enabled: start counting from now, recap next week.
         weekly["last_recap"] = now.isoformat()
     elif settings["weekly_recap"] and (args.recap_now or datetime.fromisoformat(last) < recap_due_at):
-        recap = build_recap(keyed, state, settings, recap_due_at if not args.recap_now else now.astimezone(local_zone(settings)))
-        if recap:
-            embeds.append(recap)
+        week_end = recap_due_at if not args.recap_now else now.astimezone(local_zone(settings))
+        recap = build_recap(keyed, state, settings, week_end, launch_week=not weekly.get("recaps_posted"))
         reset_recap_baseline(keyed, state, now)
 
     if args.dry_run:
-        print(json.dumps(embeds, indent=2, ensure_ascii=False) if embeds else "[dry run] Nothing to post.")
+        print(json.dumps(embeds, indent=2, ensure_ascii=False) if embeds else "[dry run] No updates.")
+        print(json.dumps(recap, indent=2, ensure_ascii=False) if recap else "[dry run] No recap.")
         return
 
     if embeds:
@@ -803,6 +976,12 @@ def main():
         print(f"Posted {len(embeds)} update(s).")
     else:
         print("No changes since the last check.")
+    if recap:
+        # Discord caps a message at 6,000 characters across its embeds; split if needed.
+        size = len(json.dumps(recap, ensure_ascii=False))
+        for part in ([recap] if size < 5500 else [[e] for e in recap]):
+            post_to_discord(webhook, part)
+        print("Posted the weekly recap.")
 
     # Saved only after posting succeeds, so a failed post is retried next run.
     with open(STATE_PATH, "w", encoding="utf-8") as f:
