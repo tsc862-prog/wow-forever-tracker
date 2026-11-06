@@ -28,6 +28,11 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Always load the latest saved progress, not the copy from when this
+          # run was triggered. A run that waited in GitHub's queue would
+          # otherwise re-post updates the previous run already posted.
+          ref: main
 
       - name: Check characters and post milestones
         env:
@@ -44,7 +49,7 @@ jobs:
             git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
             git add state.json
             git commit -m "Update tracker state [skip ci]"
-            git push
+            git push || { git pull --rebase origin main && git push; }
           else
             echo "No changes to save."
           fi
