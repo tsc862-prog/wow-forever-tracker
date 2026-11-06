@@ -77,6 +77,7 @@ def main():
     print(f"\n== Detail endpoints (from {working}) ==")
     for suffix, label in [
         ("/professions", "professions"),
+        ("/encounters", "encounters summary"),
         ("/encounters/dungeons", "dungeons"),
         ("/encounters/raids", "raids"),
         ("/achievements", "achievements"),
@@ -87,6 +88,9 @@ def main():
         ("/collections", "collections index"),
     ]:
         s, b = get(region, working + suffix, token, ns)
+        if s == 200 and suffix in ("/encounters/dungeons", "/achievements") and os.environ.get("PROBE_RAW"):
+            import json as _j
+            print("      RAW " + suffix + ": " + _j.dumps(b)[:3500])
         if s == 200 and suffix in ("/equipment", "/collections/mounts"):
             import json as _json
             items = (b or {}).get("equipped_items") or (b or {}).get("mounts") or []
