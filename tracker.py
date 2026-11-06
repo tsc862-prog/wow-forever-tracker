@@ -592,7 +592,7 @@ def emoji_image_url(snap, settings):
 def character_embed(c, snap, lines, settings=None):
     if len(lines) > 25:  # keep long catch-up posts readable
         lines = lines[:24] + [f"…and {len(lines) - 24} more"]
-    describe = " ".join(str(x) for x in (snap.get("race"), snap.get("class")) if x)
+    describe = " ".join(str(x) for x in (snap.get("race"), snap.get("spec"), snap.get("class")) if x)
     footer = f"Level {snap.get('level') or '?'} {describe}".strip()
     if c.get("owner"):
         footer += f" · {c['owner']}"
@@ -652,6 +652,8 @@ def recap_summary(snap):
         "achievements": len(snap.get("achievements") or {}),
     }
 
+
+NEW_CHARACTER_MAX_LEVEL = 12
 
 LAUNCH_BASELINE = {"level": 1, "xp": 0, "stats": {}, "professions": {}, "clears": {},
                    "epics": [], "rep": {}, "achievements": 0}
@@ -910,7 +912,7 @@ def main():
     weekly.setdefault("baseline", {})
 
     token = get_token(client_id, client_secret)
-    embeds, newly_tracked, unavailable = [], [], []
+    embeds, unavailable = [], []
 
     def check(c):
         region = c.get("region", default_region).lower()
@@ -938,7 +940,11 @@ def main():
         old = state["characters"].get(key)
         lines = []
         if old is None:
-            newly_tracked.append(f"{display_name(c)}: level {snap.get('level') or '?'}")
+            lines.append(f"🎉 **Joined the tracker** at level **{snap.get('level') or '?'}**")
+            profs = sorted((snap.get("professions") or {}).items(), key=lambda kv: -kv[1])
+            profs = [f"{p} {v}" for p, v in profs if v > 1][:4]
+            if profs:
+                lines.append("🛠️ " + " · ".join(profs))
         else:
             lines = find_changes(key, old, snap, settings, state["group"])
 
@@ -960,18 +966,16 @@ def main():
             embeds.append(character_embed(c, snap, lines, settings))
         merge_gear(old, snap)
         state["characters"][key] = keep_baselines(old, snap)
-        weekly["baseline"].setdefault(key, recap_summary(state["characters"][key]))
+        if key not in weekly["baseline"]:
+            # A character first seen at a low level (Blizzard only lists level 10+)
+            # is brand new, so the week counts from level 1. Anyone higher, like a
+            # friend added later, counts from when the tracker first saw them.
+            fresh = (snap.get("level") or 0) <= NEW_CHARACTER_MAX_LEVEL
+            weekly["baseline"][key] = dict(LAUNCH_BASELINE) if fresh else recap_summary(state["characters"][key])
 
     if unavailable:
         print("[info] No Blizzard data yet for: " + ", ".join(unavailable))
         print("       (They show up after the character logs into the world once.)")
-
-    if newly_tracked:
-        embeds.insert(0, {
-            "title": "Now tracking",
-            "description": "\n".join(f"• {n}" for n in newly_tracked),
-            "color": DEFAULT_COLOR,
-        })
 
     # Weekly recap: posted by the first run after the recap time, as its own message.
     now = datetime.now(timezone.utc)
