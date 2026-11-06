@@ -25,10 +25,10 @@
       "level": 15,
       "professions": {
         "Cooking": 2,
-        "Engineering": 78,
+        "Engineering": 91,
         "First Aid": 1,
         "Fishing": 20,
-        "Mining": 70
+        "Mining": 94
       },
       "race": "Dwarf",
       "raids": {}
