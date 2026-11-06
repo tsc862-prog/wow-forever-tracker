@@ -129,6 +129,26 @@ def main():
         for ev in (b or {}).get("recent_events") or []:
             print(f"   recent: {t.name_of(ev.get('achievement'))} at {ev.get('timestamp')}")
 
+    if os.environ.get("PROBE_RAW"):
+        import json as _j
+        def strip(o):
+            if isinstance(o, dict):
+                return {k: strip(v) for k, v in o.items() if k not in ("_links", "key", "media", "href", "character")}
+            if isinstance(o, list):
+                return [strip(v) for v in o]
+            return o
+        print("\n== Full inventory ==")
+        s0, prof = get(region, working, token, ns)
+        flat = {k: v for k, v in (prof or {}).items() if not (isinstance(v, dict) and set(v) <= {"href"})}
+        print("PROFILE: " + _j.dumps(strip(flat))[:2500])
+        for suffix in ("/reputations", "/titles", "/pvp-summary", "/specializations", "/collections/pets",
+                       "/collections/toys", "/collections/heirlooms", "/collections/transmogs", "/hunter-pets",
+                       "/appearance", "/quests/completed", "/quests", "/character-media", "/mythic-keystone-profile",
+                       "/soulbinds", "/status"):
+            s1, b1 = get(region, working + suffix, token, ns)
+            body = _j.dumps(strip(b1))
+            print(f"{suffix} [{s1}] ({len(body)} chars): {body[:1200]}")
+
     print(f"\n✅ Character lookup works. If the path above isn't the realmless one, "
           f"add  \"api_path\": \"{working}\"  to that character in characters.json.")
 
