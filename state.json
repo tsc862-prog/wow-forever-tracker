@@ -22,19 +22,14 @@
       "level": 19,
       "professions": {
         "Blacksmithing": 94,
-        "Cooking": 17,
-        "First Aid": 1,
+        "Cooking": 75,
+        "First Aid": 14,
         "Fishing": 1,
-        "Mining": 108
+        "Mining": 112
       },
       "race": "Dwarf",
       "raids": {},
       "reputations": {
-        "Darkmoon Faire": {
-          "name": "Neutral",
-          "raw": 0,
-          "tier": 3
-        },
         "Darnassus": {
           "name": "Friendly",
           "raw": 3946,
@@ -64,11 +59,6 @@
           "name": "Friendly",
           "raw": 4208,
           "tier": 4
-        },
-        "The League of Arathor": {
-          "name": "Neutral",
-          "raw": 0,
-          "tier": 3
         }
       },
       "spec": "Protection",
