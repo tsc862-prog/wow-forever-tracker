@@ -28,7 +28,41 @@
         "Mining": 108
       },
       "race": "Dwarf",
-      "raids": {}
+      "raids": {},
+      "reputations": {
+        "Darkmoon Faire": {
+          "name": "Neutral",
+          "tier": 3
+        },
+        "Darnassus": {
+          "name": "Friendly",
+          "tier": 4
+        },
+        "Gadgetzan": {
+          "name": "Neutral",
+          "tier": 3
+        },
+        "Gnomeregan Exiles": {
+          "name": "Friendly",
+          "tier": 4
+        },
+        "Ironforge": {
+          "name": "Honored",
+          "tier": 5
+        },
+        "Silverwing Sentinels": {
+          "name": "Neutral",
+          "tier": 3
+        },
+        "Stormwind": {
+          "name": "Friendly",
+          "tier": 4
+        },
+        "The League of Arathor": {
+          "name": "Neutral",
+          "tier": 3
+        }
+      }
     },
     "us:tired-mexican": {
       "achievements": {
@@ -63,7 +97,53 @@
         "Mining": 101
       },
       "race": "Dwarf",
-      "raids": {}
+      "raids": {},
+      "reputations": {
+        "Booty Bay": {
+          "name": "Neutral",
+          "tier": 3
+        },
+        "Darkmoon Faire": {
+          "name": "Neutral",
+          "tier": 3
+        },
+        "Darnassus": {
+          "name": "Friendly",
+          "tier": 4
+        },
+        "Gadgetzan": {
+          "name": "Neutral",
+          "tier": 3
+        },
+        "Gnomeregan Exiles": {
+          "name": "Friendly",
+          "tier": 4
+        },
+        "Ironforge": {
+          "name": "Honored",
+          "tier": 5
+        },
+        "Silverwing Sentinels": {
+          "name": "Neutral",
+          "tier": 3
+        },
+        "Stormpike Guard": {
+          "name": "Neutral",
+          "tier": 3
+        },
+        "Stormwind": {
+          "name": "Friendly",
+          "tier": 4
+        },
+        "The League of Arathor": {
+          "name": "Neutral",
+          "tier": 3
+        },
+        "Theramore Expeditionary Force": {
+          "name": "Neutral",
+          "tier": 3
+        }
+      }
     }
   },
   "group": {},
