@@ -9,6 +9,11 @@
           "boss": "Bazzalan",
           "count": 1,
           "instance": "Ragefire Chasm"
+        },
+        "63573": {
+          "boss": "Durgen Dirgehammer",
+          "count": 1,
+          "instance": "Hall of Thanes"
         }
       },
       "class": "Paladin",
@@ -34,6 +39,11 @@
           "boss": "Bazzalan",
           "count": 1,
           "instance": "Ragefire Chasm"
+        },
+        "63573": {
+          "boss": "Durgen Dirgehammer",
+          "count": 1,
+          "instance": "Hall of Thanes"
         }
       },
       "class": "Hunter",
