@@ -12,6 +12,7 @@ Discord message with everything that changed since then:
   - dungeons cleared for the first time (final boss killed, see dungeons.json)
   - raid bosses killed for the first time (from boss-kill statistics)
   - achievements earned
+  - reputation milestones (Honored, Revered, Exalted)
   - gear: every new epic/legendary equipped, and a character's first blue
   - mounts: new mounts (mounts are account-wide, so posted once per friend)
 
@@ -82,6 +83,8 @@ DEFAULT_SETTINGS = {
     "track_achievements": True,
     "track_gear": True,
     "track_mounts": True,
+    "track_reputation": True,
+    "reputation_milestones": ["Honored", "Revered", "Exalted"],
     "weekly_recap": True,
     "recap_day": "sunday",
     "recap_hour": 19,
@@ -334,6 +337,19 @@ def cleared_dungeons(snap):
     return sorted(out)
 
 
+def parse_reputations(body):
+    """{faction name: {"tier": n, "name": "Honored"}}. Higher tier = better standing."""
+    if not isinstance(body, dict):
+        return None
+    out = {}
+    for r in body.get("reputations") or []:
+        faction = name_of(r.get("faction"))
+        standing = r.get("standing") or {}
+        if faction and isinstance(standing.get("tier"), int):
+            out[faction] = {"tier": standing["tier"], "name": standing.get("name") or ""}
+    return out
+
+
 def fetch_snapshot(c, region, token, namespace, settings):
     """Return the character's current snapshot, or None if Blizzard has no data."""
     for path in candidate_paths(c):
@@ -370,6 +386,8 @@ def fetch_snapshot(c, region, token, namespace, settings):
             snap["_equipped"] = sub("/equipment", parse_equipment)
         if settings["track_mounts"]:
             snap["_mounts"] = sub("/collections/mounts", parse_mounts)
+        if settings["track_reputation"]:
+            snap["reputations"] = sub("/reputations", parse_reputations)
         return snap
     return None
 
@@ -446,6 +464,18 @@ def find_changes(key, old, new, settings, group):
             elif kind == "boss":
                 lines.append(f"⚔️ First kill: **{new_k[sid]['boss']}** ({new_k[sid]['instance']})")
 
+    # Reputation: post when a faction reaches a milestone standing (Honored,
+    # Revered, Exalted by default). Characters tracked before this feature
+    # existed record their current standings quietly.
+    old_rep, new_rep = old.get("reputations"), new.get("reputations")
+    if old_rep is not None and new_rep is not None:
+        wanted = {m.lower() for m in settings["reputation_milestones"]}
+        for faction, now in sorted(new_rep.items(), key=lambda kv: (-kv[1]["tier"], kv[0])):
+            before = (old_rep.get(faction) or {}).get("tier", 3)  # unseen faction = Neutral
+            if now["tier"] > before and now["name"].lower() in wanted:
+                icon = "👑" if now["name"].lower() == "exalted" else "🤝"
+                lines.append(f"{icon} Reached **{now['name']}** with {faction}")
+
     # Achievements
     old_a, new_a = old.get("achievements"), new.get("achievements")
     if old_a is not None and new_a is not None:
@@ -488,7 +518,7 @@ def merge_gear(old, new):
 
 def keep_baselines(old, new):
     """If a feature failed to load this run, keep last run's data for it."""
-    for field in ("professions", "dungeons", "raids", "achievements", "boss_kills"):
+    for field in ("professions", "dungeons", "raids", "achievements", "boss_kills", "reputations"):
         if new.get(field) is None and old and old.get(field) is not None:
             new[field] = old[field]
     return new

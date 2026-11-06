@@ -18,7 +18,13 @@
     "weekly_recap": true,
     "recap_day": "sunday",
     "recap_hour": 19,
-    "timezone": "America/Los_Angeles"
+    "timezone": "America/Los_Angeles",
+    "track_reputation": true,
+    "reputation_milestones": [
+      "Honored",
+      "Revered",
+      "Exalted"
+    ]
   },
   "friends": [
     {
