@@ -32,37 +32,62 @@
       "reputations": {
         "Darkmoon Faire": {
           "name": "Neutral",
+          "raw": 0,
           "tier": 3
         },
         "Darnassus": {
           "name": "Friendly",
+          "raw": 3946,
           "tier": 4
         },
         "Gadgetzan": {
           "name": "Neutral",
+          "raw": 600,
           "tier": 3
         },
         "Gnomeregan Exiles": {
           "name": "Friendly",
+          "raw": 8006,
           "tier": 4
         },
         "Ironforge": {
           "name": "Honored",
+          "raw": 11057,
           "tier": 5
         },
         "Silverwing Sentinels": {
           "name": "Neutral",
+          "raw": 255,
           "tier": 3
         },
         "Stormwind": {
           "name": "Friendly",
+          "raw": 4208,
           "tier": 4
         },
         "The League of Arathor": {
           "name": "Neutral",
+          "raw": 0,
           "tier": 3
         }
-      }
+      },
+      "spec": "Protection",
+      "stats": {
+        "critters": 7,
+        "deaths": 14,
+        "drinks": 15,
+        "flights": 10,
+        "food": 12,
+        "health_potions": 26,
+        "hearths": 9,
+        "honorable_kills": 50,
+        "killing_blows": 531,
+        "mana_potions": 2,
+        "mobs": 1085,
+        "need_rolls": 6,
+        "quests": 120
+      },
+      "xp": 6097
     },
     "us:tired-mexican": {
       "achievements": {
@@ -101,49 +126,77 @@
       "reputations": {
         "Booty Bay": {
           "name": "Neutral",
+          "raw": 500,
           "tier": 3
         },
         "Darkmoon Faire": {
           "name": "Neutral",
+          "raw": 0,
           "tier": 3
         },
         "Darnassus": {
           "name": "Friendly",
+          "raw": 3877,
           "tier": 4
         },
         "Gadgetzan": {
           "name": "Neutral",
+          "raw": 600,
           "tier": 3
         },
         "Gnomeregan Exiles": {
           "name": "Friendly",
+          "raw": 7956,
           "tier": 4
         },
         "Ironforge": {
           "name": "Honored",
+          "raw": 10838,
           "tier": 5
         },
         "Silverwing Sentinels": {
           "name": "Neutral",
+          "raw": 255,
           "tier": 3
         },
         "Stormpike Guard": {
           "name": "Neutral",
+          "raw": 0,
           "tier": 3
         },
         "Stormwind": {
           "name": "Friendly",
+          "raw": 3990,
           "tier": 4
         },
         "The League of Arathor": {
           "name": "Neutral",
+          "raw": 0,
           "tier": 3
         },
         "Theramore Expeditionary Force": {
           "name": "Neutral",
+          "raw": 0,
           "tier": 3
         }
-      }
+      },
+      "spec": "Marksmanship",
+      "stats": {
+        "critters": 8,
+        "deaths": 19,
+        "drinks": 16,
+        "flights": 19,
+        "food": 17,
+        "health_potions": 6,
+        "hearths": 6,
+        "honorable_kills": 52,
+        "killing_blows": 643,
+        "mana_potions": 1,
+        "mobs": 1026,
+        "need_rolls": 12,
+        "quests": 116
+      },
+      "xp": 1512
     }
   },
   "group": {},
