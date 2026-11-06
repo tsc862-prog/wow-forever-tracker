@@ -9,7 +9,8 @@ Discord message with everything that changed since then:
   - level-ups (and who was first to max level)
   - professions learned, and profession skill milestones
   - dungeons cleared for the first time
-  - dungeon and raid bosses killed for the first time (from boss-kill statistics)
+  - dungeons cleared for the first time (final boss killed, see dungeons.json)
+  - raid bosses killed for the first time (from boss-kill statistics)
   - achievements earned
   - gear: every new epic/legendary equipped, and a character's first blue
   - mounts: new mounts (mounts are account-wide, so posted once per friend)
@@ -51,6 +52,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 CONFIG_PATH = ROOT / "characters.json"
 STATE_PATH = ROOT / "state.json"
+DUNGEONS_PATH = ROOT / "dungeons.json"
 USER_AGENT = "WoWForeverTracker/1.2"
 DEFAULT_COLOR = 0x5865F2
 RECAP_COLOR = 0xF1C40F
@@ -286,6 +288,52 @@ def parse_boss_kills(body):
     return out
 
 
+def norm(text):
+    return re.sub(r"[^a-z0-9]", "", (text or "").lower())
+
+
+class Dungeons:
+    """Final bosses from dungeons.json: a final-boss kill counts as a dungeon clear."""
+
+    def __init__(self, data=None):
+        data = data or {}
+        self.final = {}      # normalized final boss name -> dungeon name
+        self.unknown = set()  # normalized dungeon names whose final boss isn't known yet
+        self.known = set()   # normalized names of every listed dungeon
+        for d in data.get("dungeons") or []:
+            self.known.add(norm(d["name"]))
+            if d.get("final_boss"):
+                self.final[norm(d["final_boss"])] = d["name"]
+            else:
+                self.unknown.add(norm(d["name"]))
+        self.ignore = {str(i) for i in data.get("ignore_stat_ids") or []}
+
+    def classify(self, kill):
+        """('clear', dungeon) | ('boss', None) to post a boss kill | (None, None) to stay quiet."""
+        dungeon = self.final.get(norm(kill["boss"]))
+        if dungeon:
+            return "clear", dungeon
+        instance = norm(kill["instance"])
+        if instance in self.unknown or any(instance and (instance in k or k in instance) for k in self.unknown):
+            return "boss", None   # new dungeon with an unknown final boss: show every boss
+        if instance in self.known or any(instance and (instance in k or k in instance) for k in self.known):
+            return None, None     # a known dungeon's earlier boss: not reliable in Forever, skip
+        return "boss", None       # raids and anything unlisted
+
+
+DUNGEONS = Dungeons()
+
+
+def cleared_dungeons(snap):
+    """Names of dungeons this character has cleared (killed the final boss)."""
+    out = set()
+    for sid, kill in (snap.get("boss_kills") or {}).items():
+        kind, dungeon = DUNGEONS.classify(kill)
+        if kind == "clear" and sid not in DUNGEONS.ignore:
+            out.add(dungeon)
+    return sorted(out)
+
+
 def fetch_snapshot(c, region, token, namespace, settings):
     """Return the character's current snapshot, or None if Blizzard has no data."""
     for path in candidate_paths(c):
@@ -381,14 +429,22 @@ def find_changes(key, old, new, settings, group):
                     if boss not in before["bosses"]:
                         lines.append(f"⚔️ First kill: **{boss}** ({inst})")
 
-    # Boss kills (dungeons and raids). Characters tracked before this feature
-    # existed have no saved kills yet, so their current kills post once.
+    # Boss kills, from the boss-kill statistics. A dungeon's final boss posts
+    # as a clear; raid bosses (and bosses in new dungeons whose final boss
+    # isn't known yet) post as first kills. Mislabeled stats are skipped.
     new_k = new.get("boss_kills")
     if new_k is not None:
         old_k = old.get("boss_kills") or {}
-        fresh = [k for k in new_k if k not in old_k]
-        for k in sorted(fresh, key=lambda k: (new_k[k]["instance"], new_k[k]["boss"])):
-            lines.append(f"⚔️ First kill: **{new_k[k]['boss']}** ({new_k[k]['instance']})")
+        already = set(cleared_dungeons(old))
+        for sid in sorted(new_k, key=lambda k: (new_k[k]["instance"], new_k[k]["boss"])):
+            if sid in old_k or sid in DUNGEONS.ignore:
+                continue
+            kind, dungeon = DUNGEONS.classify(new_k[sid])
+            if kind == "clear" and dungeon not in already:
+                lines.append(f"🗝️ Cleared **{dungeon}** for the first time")
+                already.add(dungeon)
+            elif kind == "boss":
+                lines.append(f"⚔️ First kill: **{new_k[sid]['boss']}** ({new_k[sid]['instance']})")
 
     # Achievements
     old_a, new_a = old.get("achievements"), new.get("achievements")
@@ -477,10 +533,12 @@ def recap_summary(snap):
     """The numbers a weekly recap compares."""
     return {
         "level": snap.get("level") or 0,
-        "dungeons": sorted(k for k, v in (snap.get("dungeons") or {}).items() if v.get("cleared")),
+        "dungeons": sorted(set(cleared_dungeons(snap)) |
+                           {k for k, v in (snap.get("dungeons") or {}).items() if v.get("cleared")}),
         "bosses": sorted(set(
             [f"{i}|{b}" for i, v in (snap.get("raids") or {}).items() for b in v.get("bosses", [])]
-            + [f"{v['instance']}|{v['boss']}" for v in (snap.get("boss_kills") or {}).values()])),
+            + [f"{v['instance']}|{v['boss']}" for sid, v in (snap.get("boss_kills") or {}).items()
+               if sid not in DUNGEONS.ignore and DUNGEONS.classify(v)[0] == "boss"])),
         "epics": sorted(k for k, v in (snap.get("gear") or {}).items()
                         if QUALITY_RANK.get(v.get("quality"), 0) >= QUALITY_RANK["EPIC"]),
         "professions": dict(snap.get("professions") or {}),
@@ -618,6 +676,8 @@ def main():
     if not characters:
         sys.exit("characters.json is missing or has no characters.")
     settings = {**DEFAULT_SETTINGS, **config.get("settings", {})}
+    global DUNGEONS
+    DUNGEONS = Dungeons(load_json(DUNGEONS_PATH, {}))
     default_region = config.get("region", "us").lower()
 
     state = load_json(STATE_PATH, {"characters": {}, "group": {}})

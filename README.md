@@ -4,7 +4,8 @@ Every 30 minutes, checks your group's WoW: Forever characters and posts one Disc
 
 - ⬆️ Every level-up (🏆 first in the group to 60, ⭐ everyone else at 60)
 - 📜 Professions learned, 🛠️ profession skill milestones (75 / 150 / 225 / 300)
-- ⚔️ First kill of each dungeon and raid boss
+- 🗝️ Dungeons cleared for the first time (the final boss listed in `dungeons.json`)
+- ⚔️ First kill of each raid boss
 - 🎖️ Achievements earned
 - 🟣 Every new epic equipped, and 🔵 each character's first blue
 - 🐎 New mounts (once per friend, since mounts are account-wide)
