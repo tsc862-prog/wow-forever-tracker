@@ -1,5 +1,75 @@
 {
   "characters": {
+    "us:belgara-bluemoon": {
+      "achievements": {
+        "779": "Explore Loch Modan"
+      },
+      "boss_kills": {},
+      "class": "Druid",
+      "dungeons": {},
+      "gear": {},
+      "level": 10,
+      "professions": {
+        "Cooking": 13,
+        "Fishing": 1,
+        "Leatherworking": 29,
+        "Skinning": 65
+      },
+      "race": "High Order Skyborne",
+      "raids": {},
+      "reputations": {
+        "Cenarion Circle": {
+          "name": "Neutral",
+          "raw": 2100,
+          "tier": 3
+        },
+        "Darnassus": {
+          "name": "Neutral",
+          "raw": 500,
+          "tier": 3
+        },
+        "Gnomeregan Exiles": {
+          "name": "Neutral",
+          "raw": 2000,
+          "tier": 3
+        },
+        "High Order": {
+          "name": "Friendly",
+          "raw": 4965,
+          "tier": 4
+        },
+        "Ironforge": {
+          "name": "Neutral",
+          "raw": 2000,
+          "tier": 3
+        },
+        "Kirin Tor": {
+          "name": "Friendly",
+          "raw": 3000,
+          "tier": 4
+        },
+        "Nightclaw Druids": {
+          "name": "Neutral",
+          "raw": 100,
+          "tier": 3
+        },
+        "Stormwind": {
+          "name": "Friendly",
+          "raw": 3100,
+          "tier": 4
+        }
+      },
+      "spec": null,
+      "stats": {
+        "deaths": 2,
+        "drinks": 11,
+        "hearths": 4,
+        "killing_blows": 212,
+        "mobs": 223,
+        "quests": 52
+      },
+      "xp": 5654
+    },
     "us:hefe-weizenson": {
       "achievements": {
         "779": "Explore Loch Modan"
@@ -181,6 +251,16 @@
   },
   "weekly": {
     "baseline": {
+      "us:belgara-bluemoon": {
+        "achievements": 0,
+        "clears": {},
+        "epics": [],
+        "level": 1,
+        "professions": {},
+        "rep": {},
+        "stats": {},
+        "xp": 0
+      },
       "us:hefe-weizenson": {
         "bosses": [],
         "dungeons": [],
