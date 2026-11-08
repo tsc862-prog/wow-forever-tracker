@@ -80,6 +80,11 @@
           "count": 1,
           "instance": "Ragefire Chasm"
         },
+        "63570": {
+          "boss": "Edwin VanCleef",
+          "count": 1,
+          "instance": "Deadmines"
+        },
         "63573": {
           "boss": "Durgen Dirgehammer",
           "count": 1,
@@ -88,21 +93,26 @@
       },
       "class": "Paladin",
       "dungeons": {},
-      "gear": {},
-      "level": 20,
+      "gear": {
+        "284715": {
+          "name": "First Mate Band",
+          "quality": "RARE"
+        }
+      },
+      "level": 22,
       "professions": {
-        "Blacksmithing": 100,
+        "Blacksmithing": 101,
         "Cooking": 78,
         "First Aid": 14,
         "Fishing": 1,
-        "Mining": 117
+        "Mining": 121
       },
       "race": "Dwarf",
       "raids": {},
       "reputations": {
         "Darnassus": {
           "name": "Friendly",
-          "raw": 4105,
+          "raw": 4411,
           "tier": 4
         },
         "Gadgetzan": {
@@ -112,12 +122,12 @@
         },
         "Gnomeregan Exiles": {
           "name": "Friendly",
-          "raw": 8165,
+          "raw": 8571,
           "tier": 4
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 11216,
+          "raw": 11672,
           "tier": 5
         },
         "Silverwing Sentinels": {
@@ -127,27 +137,27 @@
         },
         "Stormwind": {
           "name": "Friendly",
-          "raw": 4943,
+          "raw": 6018,
           "tier": 4
         }
       },
       "spec": "Protection",
       "stats": {
-        "critters": 7,
-        "deaths": 14,
-        "drinks": 18,
-        "flights": 12,
+        "critters": 20,
+        "deaths": 19,
+        "drinks": 50,
+        "flights": 14,
         "food": 15,
-        "health_potions": 31,
+        "health_potions": 33,
         "hearths": 11,
         "honorable_kills": 50,
-        "killing_blows": 650,
-        "mana_potions": 2,
-        "mobs": 1269,
-        "need_rolls": 6,
-        "quests": 134
+        "killing_blows": 730,
+        "mana_potions": 9,
+        "mobs": 1672,
+        "need_rolls": 9,
+        "quests": 148
       },
-      "xp": 12423
+      "xp": 4580
     },
     "us:tired-mexican": {
       "achievements": {
@@ -158,6 +168,11 @@
           "boss": "Bazzalan",
           "count": 1,
           "instance": "Ragefire Chasm"
+        },
+        "63570": {
+          "boss": "Edwin VanCleef",
+          "count": 1,
+          "instance": "Deadmines"
         },
         "63573": {
           "boss": "Durgen Dirgehammer",
@@ -173,20 +188,25 @@
           "quality": "RARE"
         }
       },
-      "level": 19,
+      "level": 21,
       "professions": {
-        "Cooking": 11,
+        "Cooking": 23,
         "Engineering": 101,
         "First Aid": 1,
         "Fishing": 20,
-        "Mining": 101
+        "Mining": 102
       },
       "race": "Dwarf",
       "raids": {},
       "reputations": {
+        "Azeroth Commerce Authority": {
+          "name": "Neutral",
+          "raw": 0,
+          "tier": 3
+        },
         "Darnassus": {
           "name": "Friendly",
-          "raw": 3927,
+          "raw": 4290,
           "tier": 4
         },
         "Gadgetzan": {
@@ -196,12 +216,12 @@
         },
         "Gnomeregan Exiles": {
           "name": "Friendly",
-          "raw": 8006,
+          "raw": 8468,
           "tier": 4
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 10888,
+          "raw": 11401,
           "tier": 5
         },
         "Silverwing Sentinels": {
@@ -211,27 +231,27 @@
         },
         "Stormwind": {
           "name": "Friendly",
-          "raw": 4190,
+          "raw": 5590,
           "tier": 4
         }
       },
       "spec": "Marksmanship",
       "stats": {
-        "critters": 8,
-        "deaths": 19,
-        "drinks": 17,
-        "flights": 20,
-        "food": 19,
-        "health_potions": 7,
+        "critters": 21,
+        "deaths": 23,
+        "drinks": 24,
+        "flights": 26,
+        "food": 22,
+        "health_potions": 10,
         "hearths": 6,
         "honorable_kills": 52,
-        "killing_blows": 722,
+        "killing_blows": 936,
         "mana_potions": 1,
-        "mobs": 1146,
-        "need_rolls": 12,
-        "quests": 119
+        "mobs": 1569,
+        "need_rolls": 20,
+        "quests": 142
       },
-      "xp": 10965
+      "xp": 16326
     }
   },
   "group": {},
