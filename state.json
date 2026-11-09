@@ -8,12 +8,12 @@
       "class": "Druid",
       "dungeons": {},
       "gear": {},
-      "level": 10,
+      "level": 12,
       "professions": {
         "Cooking": 13,
         "Fishing": 1,
-        "Leatherworking": 29,
-        "Skinning": 65
+        "Leatherworking": 45,
+        "Skinning": 73
       },
       "race": "High Order Skyborne",
       "raids": {},
@@ -35,7 +35,7 @@
         },
         "High Order": {
           "name": "Friendly",
-          "raw": 4965,
+          "raw": 5450,
           "tier": 4
         },
         "Ironforge": {
@@ -59,16 +59,16 @@
           "tier": 4
         }
       },
-      "spec": null,
+      "spec": "Restoration",
       "stats": {
         "deaths": 2,
         "drinks": 11,
-        "hearths": 4,
-        "killing_blows": 212,
-        "mobs": 223,
-        "quests": 52
+        "hearths": 5,
+        "killing_blows": 298,
+        "mobs": 309,
+        "quests": 69
       },
-      "xp": 5654
+      "xp": 3781
     },
     "us:hefe-weizenson": {
       "achievements": {
