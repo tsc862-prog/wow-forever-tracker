@@ -8,7 +8,7 @@
       "class": "Druid",
       "dungeons": {},
       "gear": {},
-      "level": 12,
+      "level": 13,
       "professions": {
         "Cooking": 13,
         "Fishing": 1,
@@ -35,7 +35,7 @@
         },
         "High Order": {
           "name": "Friendly",
-          "raw": 5450,
+          "raw": 5910,
           "tier": 4
         },
         "Ironforge": {
@@ -62,13 +62,13 @@
       "spec": "Restoration",
       "stats": {
         "deaths": 2,
-        "drinks": 11,
-        "hearths": 5,
-        "killing_blows": 298,
-        "mobs": 309,
-        "quests": 69
+        "drinks": 12,
+        "hearths": 6,
+        "killing_blows": 335,
+        "mobs": 349,
+        "quests": 79
       },
-      "xp": 3781
+      "xp": 1764
     },
     "us:hefe-weizenson": {
       "achievements": {
