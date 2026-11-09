@@ -207,11 +207,6 @@
       "race": "Dwarf",
       "raids": {},
       "reputations": {
-        "Azeroth Commerce Authority": {
-          "name": "Neutral",
-          "raw": 0,
-          "tier": 3
-        },
         "Darnassus": {
           "name": "Friendly",
           "raw": 4290,
