@@ -194,6 +194,14 @@
         "12988": {
           "name": "Starsight Tunic",
           "quality": "RARE"
+        },
+        "1936": {
+          "name": "Goblin Screwdriver",
+          "quality": "RARE"
+        },
+        "5199": {
+          "name": "Smelting Pants",
+          "quality": "RARE"
         }
       },
       "level": 21,
@@ -209,7 +217,7 @@
       "reputations": {
         "Darnassus": {
           "name": "Friendly",
-          "raw": 4290,
+          "raw": 4296,
           "tier": 4
         },
         "Gadgetzan": {
@@ -219,12 +227,12 @@
         },
         "Gnomeregan Exiles": {
           "name": "Friendly",
-          "raw": 8468,
+          "raw": 8475,
           "tier": 4
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 11401,
+          "raw": 11407,
           "tier": 5
         },
         "Silverwing Sentinels": {
@@ -234,7 +242,7 @@
         },
         "Stormwind": {
           "name": "Friendly",
-          "raw": 5590,
+          "raw": 5615,
           "tier": 4
         }
       },
@@ -243,7 +251,7 @@
         "critters": 21,
         "deaths": 23,
         "drinks": 24,
-        "flights": 26,
+        "flights": 28,
         "food": 22,
         "health_potions": 10,
         "hearths": 6,
@@ -252,9 +260,9 @@
         "mana_potions": 1,
         "mobs": 1569,
         "need_rolls": 20,
-        "quests": 142
+        "quests": 143
       },
-      "xp": 16326
+      "xp": 16476
     }
   },
   "group": {},
