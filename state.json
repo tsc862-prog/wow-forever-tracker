@@ -82,7 +82,7 @@
         },
         "63570": {
           "boss": "Edwin VanCleef",
-          "count": 1,
+          "count": 2,
           "instance": "Deadmines"
         },
         "63573": {
@@ -94,8 +94,16 @@
       "class": "Paladin",
       "dungeons": {},
       "gear": {
+        "273297": {
+          "name": "Goblin Hammer",
+          "quality": "RARE"
+        },
         "284715": {
           "name": "First Mate Band",
+          "quality": "RARE"
+        },
+        "5193": {
+          "name": "Cape of the Brotherhood",
           "quality": "RARE"
         }
       },
@@ -105,14 +113,14 @@
         "Cooking": 78,
         "First Aid": 14,
         "Fishing": 1,
-        "Mining": 121
+        "Mining": 122
       },
       "race": "Dwarf",
       "raids": {},
       "reputations": {
         "Darnassus": {
           "name": "Friendly",
-          "raw": 4442,
+          "raw": 4488,
           "tier": 4
         },
         "Gadgetzan": {
@@ -122,12 +130,12 @@
         },
         "Gnomeregan Exiles": {
           "name": "Friendly",
-          "raw": 8602,
+          "raw": 8675,
           "tier": 4
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 11703,
+          "raw": 11768,
           "tier": 5
         },
         "Silverwing Sentinels": {
@@ -137,27 +145,27 @@
         },
         "Stormwind": {
           "name": "Friendly",
-          "raw": 6143,
+          "raw": 6283,
           "tier": 4
         }
       },
       "spec": "Protection",
       "stats": {
-        "critters": 20,
-        "deaths": 19,
-        "drinks": 50,
-        "flights": 14,
-        "food": 15,
-        "health_potions": 33,
-        "hearths": 12,
+        "critters": 22,
+        "deaths": 20,
+        "drinks": 71,
+        "flights": 18,
+        "food": 16,
+        "health_potions": 37,
+        "hearths": 13,
         "honorable_kills": 50,
-        "killing_blows": 730,
+        "killing_blows": 786,
         "mana_potions": 9,
-        "mobs": 1672,
-        "need_rolls": 9,
-        "quests": 150
+        "mobs": 1896,
+        "need_rolls": 11,
+        "quests": 160
       },
-      "xp": 6050
+      "xp": 26093
     },
     "us:tired-mexican": {
       "achievements": {
