@@ -2,7 +2,8 @@
   "characters": {
     "us:belgara-bluemoon": {
       "achievements": {
-        "779": "Explore Loch Modan"
+        "779": "Explore Loch Modan",
+        "855": "Explore Moonglade"
       },
       "boss_kills": {},
       "class": "Druid",
@@ -20,27 +21,37 @@
       "reputations": {
         "Cenarion Circle": {
           "name": "Neutral",
-          "raw": 2100,
+          "raw": 2135,
+          "tier": 3
+        },
+        "Darkmoon Faire": {
+          "name": "Neutral",
+          "raw": 0,
           "tier": 3
         },
         "Darnassus": {
+          "name": "Neutral",
+          "raw": 585,
+          "tier": 3
+        },
+        "Gadgetzan": {
           "name": "Neutral",
           "raw": 500,
           "tier": 3
         },
         "Gnomeregan Exiles": {
           "name": "Neutral",
-          "raw": 2000,
+          "raw": 2093,
           "tier": 3
         },
         "High Order": {
           "name": "Friendly",
-          "raw": 5960,
+          "raw": 5985,
           "tier": 4
         },
         "Ironforge": {
           "name": "Neutral",
-          "raw": 2000,
+          "raw": 2093,
           "tier": 3
         },
         "Kirin Tor": {
@@ -50,25 +61,25 @@
         },
         "Nightclaw Druids": {
           "name": "Friendly",
-          "raw": 5200,
+          "raw": 5300,
           "tier": 4
         },
         "Stormwind": {
           "name": "Friendly",
-          "raw": 3100,
+          "raw": 3118,
           "tier": 4
         }
       },
       "spec": "Restoration",
       "stats": {
         "deaths": 2,
-        "drinks": 12,
-        "hearths": 7,
-        "killing_blows": 375,
-        "mobs": 392,
-        "quests": 95
+        "drinks": 13,
+        "hearths": 8,
+        "killing_blows": 379,
+        "mobs": 397,
+        "quests": 105
       },
-      "xp": 4396
+      "xp": 10982
     },
     "us:hefe-weizenson": {
       "achievements": {
