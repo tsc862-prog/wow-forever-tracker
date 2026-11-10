@@ -83,7 +83,9 @@
     },
     "us:hefe-weizenson": {
       "achievements": {
-        "779": "Explore Loch Modan"
+        "779": "Explore Loch Modan",
+        "780": "Explore Redridge Mountains",
+        "855": "Explore Moonglade"
       },
       "boss_kills": {
         "15027": {
@@ -113,25 +115,29 @@
           "name": "First Mate Band",
           "quality": "RARE"
         },
+        "2870": {
+          "name": "Shining Silver Breastplate",
+          "quality": "RARE"
+        },
         "5193": {
           "name": "Cape of the Brotherhood",
           "quality": "RARE"
         }
       },
-      "level": 22,
+      "level": 24,
       "professions": {
-        "Blacksmithing": 120,
-        "Cooking": 78,
+        "Blacksmithing": 123,
+        "Cooking": 87,
         "First Aid": 14,
         "Fishing": 1,
-        "Mining": 122
+        "Mining": 123
       },
       "race": "Dwarf",
       "raids": {},
       "reputations": {
         "Darnassus": {
           "name": "Friendly",
-          "raw": 4488,
+          "raw": 4813,
           "tier": 4
         },
         "Gadgetzan": {
@@ -140,13 +146,13 @@
           "tier": 3
         },
         "Gnomeregan Exiles": {
-          "name": "Friendly",
-          "raw": 8675,
-          "tier": 4
+          "name": "Honored",
+          "raw": 9000,
+          "tier": 5
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 11768,
+          "raw": 12093,
           "tier": 5
         },
         "Silverwing Sentinels": {
@@ -156,27 +162,27 @@
         },
         "Stormwind": {
           "name": "Friendly",
-          "raw": 6283,
+          "raw": 7583,
           "tier": 4
         }
       },
       "spec": "Protection",
       "stats": {
-        "critters": 22,
-        "deaths": 20,
-        "drinks": 71,
-        "flights": 18,
-        "food": 16,
-        "health_potions": 37,
-        "hearths": 13,
+        "critters": 23,
+        "deaths": 21,
+        "drinks": 83,
+        "flights": 19,
+        "food": 18,
+        "health_potions": 39,
+        "hearths": 14,
         "honorable_kills": 50,
-        "killing_blows": 786,
-        "mana_potions": 9,
-        "mobs": 1896,
+        "killing_blows": 862,
+        "mana_potions": 10,
+        "mobs": 2155,
         "need_rolls": 11,
-        "quests": 160
+        "quests": 172
       },
-      "xp": 26093
+      "xp": 12915
     },
     "us:tired-mexican": {
       "achievements": {
