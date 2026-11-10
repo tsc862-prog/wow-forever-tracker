@@ -226,7 +226,7 @@
       "level": 24,
       "professions": {
         "Cooking": 88,
-        "Engineering": 150,
+        "Engineering": 151,
         "First Aid": 1,
         "Fishing": 20,
         "Mining": 117
@@ -239,11 +239,6 @@
           "raw": 2000,
           "tier": 3
         },
-        "Booty Bay": {
-          "name": "Neutral",
-          "raw": 500,
-          "tier": 3
-        },
         "Darkmoon Faire": {
           "name": "Neutral",
           "raw": 550,
@@ -251,7 +246,7 @@
         },
         "Darnassus": {
           "name": "Friendly",
-          "raw": 4973,
+          "raw": 4976,
           "tier": 4
         },
         "Gadgetzan": {
@@ -261,12 +256,12 @@
         },
         "Gnomeregan Exiles": {
           "name": "Honored",
-          "raw": 9302,
+          "raw": 9312,
           "tier": 5
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 12547,
+          "raw": 12550,
           "tier": 5
         },
         "Silverwing Sentinels": {
@@ -276,7 +271,7 @@
         },
         "Stormwind": {
           "name": "Friendly",
-          "raw": 7912,
+          "raw": 7915,
           "tier": 4
         }
       },
@@ -285,7 +280,7 @@
         "critters": 25,
         "deaths": 26,
         "drinks": 32,
-        "flights": 35,
+        "flights": 37,
         "food": 28,
         "health_potions": 12,
         "hearths": 8,
@@ -294,9 +289,9 @@
         "mana_potions": 2,
         "mobs": 2058,
         "need_rolls": 23,
-        "quests": 182
+        "quests": 184
       },
-      "xp": 27139
+      "xp": 27819
     }
   },
   "group": {},
