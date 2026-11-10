@@ -130,14 +130,14 @@
         "Cooking": 87,
         "First Aid": 14,
         "Fishing": 1,
-        "Mining": 123
+        "Mining": 124
       },
       "race": "Dwarf",
       "raids": {},
       "reputations": {
         "Darnassus": {
           "name": "Friendly",
-          "raw": 4813,
+          "raw": 4845,
           "tier": 4
         },
         "Gadgetzan": {
@@ -147,12 +147,12 @@
         },
         "Gnomeregan Exiles": {
           "name": "Honored",
-          "raw": 9000,
+          "raw": 9031,
           "tier": 5
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 12093,
+          "raw": 12125,
           "tier": 5
         },
         "Silverwing Sentinels": {
@@ -162,7 +162,7 @@
         },
         "Stormwind": {
           "name": "Friendly",
-          "raw": 7583,
+          "raw": 7708,
           "tier": 4
         }
       },
@@ -170,19 +170,19 @@
       "stats": {
         "critters": 23,
         "deaths": 21,
-        "drinks": 83,
-        "flights": 19,
+        "drinks": 84,
+        "flights": 20,
         "food": 18,
         "health_potions": 39,
-        "hearths": 14,
+        "hearths": 15,
         "honorable_kills": 50,
-        "killing_blows": 862,
+        "killing_blows": 878,
         "mana_potions": 10,
-        "mobs": 2155,
+        "mobs": 2171,
         "need_rolls": 11,
-        "quests": 172
+        "quests": 175
       },
-      "xp": 12915
+      "xp": 19150
     },
     "us:tired-mexican": {
       "achievements": {
