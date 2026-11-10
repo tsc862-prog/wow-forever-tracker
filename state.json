@@ -251,7 +251,7 @@
         },
         "Darnassus": {
           "name": "Friendly",
-          "raw": 4948,
+          "raw": 4973,
           "tier": 4
         },
         "Gadgetzan": {
@@ -261,12 +261,12 @@
         },
         "Gnomeregan Exiles": {
           "name": "Honored",
-          "raw": 9277,
+          "raw": 9302,
           "tier": 5
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 12522,
+          "raw": 12547,
           "tier": 5
         },
         "Silverwing Sentinels": {
@@ -276,13 +276,13 @@
         },
         "Stormwind": {
           "name": "Friendly",
-          "raw": 7812,
+          "raw": 7912,
           "tier": 4
         }
       },
       "spec": "Marksmanship",
       "stats": {
-        "critters": 24,
+        "critters": 25,
         "deaths": 26,
         "drinks": 32,
         "flights": 35,
@@ -290,13 +290,13 @@
         "health_potions": 12,
         "hearths": 8,
         "honorable_kills": 52,
-        "killing_blows": 1178,
+        "killing_blows": 1213,
         "mana_potions": 2,
-        "mobs": 1971,
+        "mobs": 2058,
         "need_rolls": 23,
-        "quests": 178
+        "quests": 182
       },
-      "xp": 17273
+      "xp": 27139
     }
   },
   "group": {},
