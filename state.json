@@ -186,6 +186,7 @@
     },
     "us:tired-mexican": {
       "achievements": {
+        "61989": "Novice Hunter",
         "62021": "Journeyman Engineer",
         "779": "Explore Loch Modan",
         "780": "Explore Redridge Mountains"
@@ -223,13 +224,13 @@
           "quality": "RARE"
         }
       },
-      "level": 24,
+      "level": 25,
       "professions": {
         "Cooking": 88,
         "Engineering": 151,
         "First Aid": 1,
         "Fishing": 20,
-        "Mining": 117
+        "Mining": 120
       },
       "race": "Dwarf",
       "raids": {},
@@ -246,7 +247,7 @@
         },
         "Darnassus": {
           "name": "Friendly",
-          "raw": 4976,
+          "raw": 5001,
           "tier": 4
         },
         "Gadgetzan": {
@@ -256,12 +257,12 @@
         },
         "Gnomeregan Exiles": {
           "name": "Honored",
-          "raw": 9312,
+          "raw": 9337,
           "tier": 5
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 12550,
+          "raw": 12575,
           "tier": 5
         },
         "Silverwing Sentinels": {
@@ -271,27 +272,32 @@
         },
         "Stormwind": {
           "name": "Friendly",
-          "raw": 7915,
+          "raw": 8015,
           "tier": 4
+        },
+        "Wildhammer Clan": {
+          "name": "Neutral",
+          "raw": 500,
+          "tier": 3
         }
       },
       "spec": "Marksmanship",
       "stats": {
         "critters": 25,
         "deaths": 26,
-        "drinks": 32,
+        "drinks": 34,
         "flights": 37,
-        "food": 28,
+        "food": 29,
         "health_potions": 12,
         "hearths": 8,
         "honorable_kills": 52,
-        "killing_blows": 1213,
+        "killing_blows": 1265,
         "mana_potions": 2,
-        "mobs": 2058,
+        "mobs": 2110,
         "need_rolls": 23,
-        "quests": 184
+        "quests": 187
       },
-      "xp": 27819
+      "xp": 8773
     }
   },
   "group": {},
