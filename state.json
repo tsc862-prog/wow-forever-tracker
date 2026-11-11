@@ -83,6 +83,7 @@
     },
     "us:hefe-weizenson": {
       "achievements": {
+        "61997": "Novice Paladin",
         "779": "Explore Loch Modan",
         "780": "Explore Redridge Mountains",
         "855": "Explore Moonglade"
@@ -92,6 +93,11 @@
           "boss": "Bazzalan",
           "count": 1,
           "instance": "Ragefire Chasm"
+        },
+        "15029": {
+          "boss": "Bazil Thredd",
+          "count": 1,
+          "instance": "Stormwind Stockade"
         },
         "63570": {
           "boss": "Edwin VanCleef",
@@ -111,6 +117,10 @@
           "name": "Goblin Hammer",
           "quality": "RARE"
         },
+        "273811": {
+          "name": "Repurposed Rack",
+          "quality": "RARE"
+        },
         "284715": {
           "name": "First Mate Band",
           "quality": "RARE"
@@ -124,20 +134,20 @@
           "quality": "RARE"
         }
       },
-      "level": 24,
+      "level": 27,
       "professions": {
-        "Blacksmithing": 123,
+        "Blacksmithing": 125,
         "Cooking": 87,
         "First Aid": 14,
         "Fishing": 1,
-        "Mining": 124
+        "Mining": 132
       },
       "race": "Dwarf",
       "raids": {},
       "reputations": {
         "Darnassus": {
           "name": "Friendly",
-          "raw": 4845,
+          "raw": 5357,
           "tier": 4
         },
         "Gadgetzan": {
@@ -147,12 +157,12 @@
         },
         "Gnomeregan Exiles": {
           "name": "Honored",
-          "raw": 9031,
+          "raw": 9543,
           "tier": 5
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 12125,
+          "raw": 12637,
           "tier": 5
         },
         "Silverwing Sentinels": {
@@ -161,28 +171,28 @@
           "tier": 3
         },
         "Stormwind": {
-          "name": "Friendly",
-          "raw": 7708,
-          "tier": 4
+          "name": "Honored",
+          "raw": 9783,
+          "tier": 5
         }
       },
       "spec": "Protection",
       "stats": {
         "critters": 23,
-        "deaths": 21,
-        "drinks": 84,
-        "flights": 20,
-        "food": 18,
-        "health_potions": 39,
-        "hearths": 15,
+        "deaths": 22,
+        "drinks": 103,
+        "flights": 23,
+        "food": 22,
+        "health_potions": 43,
+        "hearths": 16,
         "honorable_kills": 50,
-        "killing_blows": 878,
+        "killing_blows": 1030,
         "mana_potions": 10,
-        "mobs": 2171,
-        "need_rolls": 11,
-        "quests": 175
+        "mobs": 2718,
+        "need_rolls": 13,
+        "quests": 209
       },
-      "xp": 19150
+      "xp": 11617
     },
     "us:tired-mexican": {
       "achievements": {
@@ -196,6 +206,11 @@
           "boss": "Bazzalan",
           "count": 1,
           "instance": "Ragefire Chasm"
+        },
+        "15029": {
+          "boss": "Bazil Thredd",
+          "count": 1,
+          "instance": "Stormwind Stockade"
         },
         "63570": {
           "boss": "Edwin VanCleef",
@@ -224,13 +239,13 @@
           "quality": "RARE"
         }
       },
-      "level": 25,
+      "level": 27,
       "professions": {
         "Cooking": 88,
         "Engineering": 151,
         "First Aid": 1,
         "Fishing": 20,
-        "Mining": 120
+        "Mining": 125
       },
       "race": "Dwarf",
       "raids": {},
@@ -247,7 +262,7 @@
         },
         "Darnassus": {
           "name": "Friendly",
-          "raw": 5001,
+          "raw": 5513,
           "tier": 4
         },
         "Gadgetzan": {
@@ -257,12 +272,12 @@
         },
         "Gnomeregan Exiles": {
           "name": "Honored",
-          "raw": 9337,
+          "raw": 9850,
           "tier": 5
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 12575,
+          "raw": 13087,
           "tier": 5
         },
         "Silverwing Sentinels": {
@@ -271,33 +286,28 @@
           "tier": 3
         },
         "Stormwind": {
-          "name": "Friendly",
-          "raw": 8015,
-          "tier": 4
-        },
-        "Wildhammer Clan": {
-          "name": "Neutral",
-          "raw": 500,
-          "tier": 3
+          "name": "Honored",
+          "raw": 10090,
+          "tier": 5
         }
       },
       "spec": "Marksmanship",
       "stats": {
         "critters": 25,
-        "deaths": 26,
-        "drinks": 34,
-        "flights": 37,
-        "food": 29,
-        "health_potions": 12,
-        "hearths": 8,
+        "deaths": 28,
+        "drinks": 40,
+        "flights": 41,
+        "food": 31,
+        "health_potions": 13,
+        "hearths": 9,
         "honorable_kills": 52,
-        "killing_blows": 1265,
-        "mana_potions": 2,
-        "mobs": 2110,
-        "need_rolls": 23,
-        "quests": 187
+        "killing_blows": 1539,
+        "mana_potions": 3,
+        "mobs": 2660,
+        "need_rolls": 26,
+        "quests": 221
       },
-      "xp": 8773
+      "xp": 29990
     }
   },
   "group": {},
