@@ -145,6 +145,11 @@
       "race": "Dwarf",
       "raids": {},
       "reputations": {
+        "Bloodsail Buccaneers": {
+          "name": "Hated",
+          "raw": -6525,
+          "tier": 0
+        },
         "Darkmoon Faire": {
           "name": "Neutral",
           "raw": 50,
@@ -170,6 +175,11 @@
           "raw": 12837,
           "tier": 5
         },
+        "Ratchet": {
+          "name": "Neutral",
+          "raw": 500,
+          "tier": 3
+        },
         "Silverwing Sentinels": {
           "name": "Neutral",
           "raw": 255,
@@ -189,15 +199,15 @@
         "flights": 25,
         "food": 22,
         "health_potions": 44,
-        "hearths": 17,
+        "hearths": 18,
         "honorable_kills": 50,
         "killing_blows": 1067,
         "mana_potions": 12,
         "mobs": 2782,
         "need_rolls": 13,
-        "quests": 224
+        "quests": 225
       },
-      "xp": 2104
+      "xp": 5335
     },
     "us:tired-mexican": {
       "achievements": {
