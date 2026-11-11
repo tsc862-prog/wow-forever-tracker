@@ -150,6 +150,11 @@
           "raw": -6525,
           "tier": 0
         },
+        "Booty Bay": {
+          "name": "Neutral",
+          "raw": 500,
+          "tier": 3
+        },
         "Darkmoon Faire": {
           "name": "Neutral",
           "raw": 50,
@@ -157,7 +162,7 @@
         },
         "Darnassus": {
           "name": "Friendly",
-          "raw": 5557,
+          "raw": 5563,
           "tier": 4
         },
         "Gadgetzan": {
@@ -167,18 +172,13 @@
         },
         "Gnomeregan Exiles": {
           "name": "Honored",
-          "raw": 9743,
+          "raw": 9750,
           "tier": 5
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 12837,
+          "raw": 12843,
           "tier": 5
-        },
-        "Ratchet": {
-          "name": "Neutral",
-          "raw": 500,
-          "tier": 3
         },
         "Silverwing Sentinels": {
           "name": "Neutral",
@@ -187,27 +187,27 @@
         },
         "Stormwind": {
           "name": "Honored",
-          "raw": 10583,
+          "raw": 10608,
           "tier": 5
         }
       },
       "spec": "Protection",
       "stats": {
         "critters": 23,
-        "deaths": 24,
+        "deaths": 25,
         "drinks": 107,
-        "flights": 25,
+        "flights": 26,
         "food": 22,
         "health_potions": 44,
-        "hearths": 18,
+        "hearths": 19,
         "honorable_kills": 50,
         "killing_blows": 1067,
         "mana_potions": 12,
         "mobs": 2782,
         "need_rolls": 13,
-        "quests": 225
+        "quests": 231
       },
-      "xp": 5335
+      "xp": 17654
     },
     "us:tired-mexican": {
       "achievements": {
