@@ -84,6 +84,7 @@
     "us:hefe-weizenson": {
       "achievements": {
         "61997": "Novice Paladin",
+        "62015": "Journeyman Blacksmith",
         "779": "Explore Loch Modan",
         "780": "Explore Redridge Mountains",
         "855": "Explore Moonglade"
@@ -113,6 +114,14 @@
       "class": "Paladin",
       "dungeons": {},
       "gear": {
+        "250524": {
+          "name": "Guard's Silvered Chain Leggings",
+          "quality": "RARE"
+        },
+        "250530": {
+          "name": "Protector's Silvered Chain Helm",
+          "quality": "RARE"
+        },
         "273297": {
           "name": "Goblin Hammer",
           "quality": "RARE"
@@ -129,6 +138,10 @@
           "name": "Shining Silver Breastplate",
           "quality": "RARE"
         },
+        "2933": {
+          "name": "Seal of Wrynn",
+          "quality": "RARE"
+        },
         "5193": {
           "name": "Cape of the Brotherhood",
           "quality": "RARE"
@@ -136,24 +149,24 @@
       },
       "level": 28,
       "professions": {
-        "Blacksmithing": 127,
+        "Blacksmithing": 151,
         "Cooking": 87,
         "First Aid": 14,
         "Fishing": 1,
-        "Mining": 134
+        "Mining": 140
       },
       "race": "Dwarf",
       "raids": {},
       "reputations": {
+        "Azeroth Commerce Authority": {
+          "name": "Neutral",
+          "raw": 2000,
+          "tier": 3
+        },
         "Bloodsail Buccaneers": {
           "name": "Hated",
           "raw": -6525,
           "tier": 0
-        },
-        "Booty Bay": {
-          "name": "Neutral",
-          "raw": 500,
-          "tier": 3
         },
         "Darkmoon Faire": {
           "name": "Neutral",
@@ -162,7 +175,7 @@
         },
         "Darnassus": {
           "name": "Friendly",
-          "raw": 5563,
+          "raw": 5695,
           "tier": 4
         },
         "Gadgetzan": {
@@ -172,12 +185,12 @@
         },
         "Gnomeregan Exiles": {
           "name": "Honored",
-          "raw": 9750,
+          "raw": 9881,
           "tier": 5
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 12843,
+          "raw": 12975,
           "tier": 5
         },
         "Silverwing Sentinels": {
@@ -187,7 +200,7 @@
         },
         "Stormwind": {
           "name": "Honored",
-          "raw": 10608,
+          "raw": 11133,
           "tier": 5
         }
       },
@@ -196,18 +209,18 @@
         "critters": 23,
         "deaths": 25,
         "drinks": 107,
-        "flights": 26,
+        "flights": 27,
         "food": 22,
         "health_potions": 44,
-        "hearths": 19,
+        "hearths": 20,
         "honorable_kills": 50,
-        "killing_blows": 1067,
+        "killing_blows": 1068,
         "mana_potions": 12,
-        "mobs": 2782,
+        "mobs": 2785,
         "need_rolls": 13,
-        "quests": 231
+        "quests": 247
       },
-      "xp": 17654
+      "xp": 30567
     },
     "us:tired-mexican": {
       "achievements": {
