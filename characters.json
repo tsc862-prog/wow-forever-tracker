@@ -51,6 +51,12 @@
       "characters": [
         { "name": "Tired", "surname": "Mexican" }
       ]
+    },
+    {
+      "name": "Kris",
+      "characters": [
+        { "name": "Daxii", "surname": "Highwind" }
+      ]
     }
   ]
 }
