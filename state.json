@@ -81,6 +81,57 @@
       },
       "xp": 10982
     },
+    "us:daxii-highwind": {
+      "achievements": {},
+      "boss_kills": {},
+      "class": "Shaman",
+      "dungeons": {},
+      "gear": {},
+      "level": 10,
+      "professions": {
+        "Cooking": 3,
+        "First Aid": 18,
+        "Leatherworking": 26,
+        "Skinning": 56
+      },
+      "race": "Dwarf",
+      "raids": {},
+      "reputations": {
+        "Darnassus": {
+          "name": "Friendly",
+          "raw": 3137,
+          "tier": 4
+        },
+        "Gnomeregan Exiles": {
+          "name": "Friendly",
+          "raw": 5628,
+          "tier": 4
+        },
+        "Ironforge": {
+          "name": "Friendly",
+          "raw": 6528,
+          "tier": 4
+        },
+        "Stormwind": {
+          "name": "Friendly",
+          "raw": 3137,
+          "tier": 4
+        }
+      },
+      "spec": null,
+      "stats": {
+        "critters": 4,
+        "deaths": 8,
+        "drinks": 7,
+        "food": 11,
+        "health_potions": 1,
+        "hearths": 2,
+        "killing_blows": 232,
+        "mobs": 256,
+        "quests": 40
+      },
+      "xp": 4277
+    },
     "us:hefe-weizenson": {
       "achievements": {
         "61997": "Novice Paladin",
@@ -346,6 +397,9 @@
         "3130": "Veteran Adventurer's Loyal Companion"
       }
     },
+    "kris": {
+      "mounts": {}
+    },
     "tim": {
       "mounts": {
         "3111": "Cerulean Prideclaw",
@@ -385,6 +439,16 @@
           "quests": 52
         },
         "xp": 5654
+      },
+      "us:daxii-highwind": {
+        "achievements": 0,
+        "clears": {},
+        "epics": [],
+        "level": 1,
+        "professions": {},
+        "rep": {},
+        "stats": {},
+        "xp": 0
       },
       "us:hefe-weizenson": {
         "achievements": 1,
