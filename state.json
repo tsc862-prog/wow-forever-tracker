@@ -198,13 +198,13 @@
           "quality": "RARE"
         }
       },
-      "level": 28,
+      "level": 30,
       "professions": {
         "Blacksmithing": 167,
         "Cooking": 150,
         "First Aid": 14,
         "Fishing": 1,
-        "Mining": 140
+        "Mining": 141
       },
       "race": "Dwarf",
       "raids": {},
@@ -226,7 +226,7 @@
         },
         "Darnassus": {
           "name": "Friendly",
-          "raw": 5695,
+          "raw": 6157,
           "tier": 4
         },
         "Gadgetzan": {
@@ -236,12 +236,12 @@
         },
         "Gnomeregan Exiles": {
           "name": "Honored",
-          "raw": 9881,
+          "raw": 10268,
           "tier": 5
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 12975,
+          "raw": 13906,
           "tier": 5
         },
         "Silverwing Sentinels": {
@@ -251,27 +251,32 @@
         },
         "Stormwind": {
           "name": "Honored",
-          "raw": 11133,
+          "raw": 12065,
           "tier": 5
+        },
+        "Wildhammer Clan": {
+          "name": "Neutral",
+          "raw": 700,
+          "tier": 3
         }
       },
       "spec": "Protection",
       "stats": {
         "critters": 23,
-        "deaths": 25,
-        "drinks": 107,
-        "flights": 27,
-        "food": 22,
-        "health_potions": 44,
-        "hearths": 20,
+        "deaths": 26,
+        "drinks": 116,
+        "flights": 29,
+        "food": 23,
+        "health_potions": 46,
+        "hearths": 22,
         "honorable_kills": 50,
-        "killing_blows": 1068,
-        "mana_potions": 12,
-        "mobs": 2785,
+        "killing_blows": 1245,
+        "mana_potions": 14,
+        "mobs": 3002,
         "need_rolls": 13,
-        "quests": 247
+        "quests": 272
       },
-      "xp": 30567
+      "xp": 22892
     },
     "us:tired-mexican": {
       "achievements": {
