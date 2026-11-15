@@ -413,6 +413,8 @@ def fetch_snapshot(c, region, token, namespace, settings):
             "class": name_of(body.get("character_class")),
             "race": name_of(body.get("race")),
             "xp": body.get("experience") if isinstance(body.get("experience"), int) else 0,
+            # Despite its name, Blizzard updates this when the character logs OUT.
+            "last_login": body.get("last_login_timestamp") if isinstance(body.get("last_login_timestamp"), int) else None,
         }
 
         def sub(suffix, parser):
@@ -426,7 +428,13 @@ def fetch_snapshot(c, region, token, namespace, settings):
         if settings["track_raids"]:
             snap["raids"] = sub("/encounters/raids", parse_encounters)
         if settings["track_achievements"]:
-            snap["achievements"] = sub("/achievements", parse_achievements)
+            a_status, a_body = api_get(region, f"{path}/achievements", token, namespace)
+            snap["achievements"] = parse_achievements(a_body) if a_status == 200 else None
+            snap["_ach_times"] = {
+                str(item.get("id")): item["completed_timestamp"]
+                for item in ((a_body or {}).get("achievements") or []) if a_status == 200
+                if isinstance(item.get("completed_timestamp"), int)
+            }
         s_status, s_body = api_get(region, f"{path}/achievements/statistics", token, namespace)
         stats, kills = parse_statistics(s_body) if s_status == 200 else (None, None)
         snap["stats"] = stats
@@ -566,6 +574,19 @@ def activity(old, new):
     new_s, old_s = new.get("stats") or {}, old.get("stats") or {}
     score += sum(abs(v - (old_s.get(k) or 0)) for k, v in new_s.items())
     return score
+
+
+def earned_by(shared, achievement_id):
+    """
+    The friend's character that was being played when an achievement was earned:
+    the one whose logout came first after the achievement's completion time.
+    Returns None when the times can't decide it.
+    """
+    when = (shared.get("times") or {}).get(achievement_id)
+    if not when:
+        return None
+    after = [x for x in shared["chars"] if (x[2].get("last_login") or 0) >= when and not x[4]]
+    return min(after, key=lambda x: x[2]["last_login"]) if after else None
 
 
 def merge_gear(old, new):
@@ -966,6 +987,8 @@ def main():
         if mounts is not None:
             shared["mounts"].update(mounts)
         shared["achievements"].update(snap.get("achievements") or {})
+        for aid, ts in (snap.pop("_ach_times", None) or {}).items():
+            shared.setdefault("times", {})[aid] = max(ts, shared.get("times", {}).get(aid, 0))
         shared["chars"].append((c, key, snap, activity(old, snap), old is None))
         cards[key] = (c, snap, lines)
         merge_gear(old, snap)
@@ -991,9 +1014,12 @@ def main():
             fresh = sorted((k for k in shared[kind] if k not in have), key=lambda k: shared[kind][k])
             for k in fresh:
                 have[k] = shared[kind][k]
-                cards[target[1]][2].append(icon.format(shared[kind][k]))
+                who = target
                 if kind == "achievements":
-                    earned = state["characters"][target[1]].setdefault("earned_achievements", [])
+                    who = earned_by(shared, k) or target
+                cards[who[1]][2].append(icon.format(shared[kind][k]))
+                if kind == "achievements":
+                    earned = state["characters"][who[1]].setdefault("earned_achievements", [])
                     earned.append(shared[kind][k])
 
     for c, snap, lines in cards.values():
