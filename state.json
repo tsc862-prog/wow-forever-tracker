@@ -468,15 +468,29 @@
   "group": {},
   "owners": {
     "gabe": {
+      "achievements": {
+        "61989": "Novice Hunter",
+        "62021": "Journeyman Engineer",
+        "779": "Explore Loch Modan",
+        "780": "Explore Redridge Mountains"
+      },
       "mounts": {
         "3111": "Cerulean Prideclaw",
         "3130": "Veteran Adventurer's Loyal Companion"
       }
     },
     "kris": {
+      "achievements": {},
       "mounts": {}
     },
     "tim": {
+      "achievements": {
+        "61997": "Novice Paladin",
+        "62015": "Journeyman Blacksmith",
+        "779": "Explore Loch Modan",
+        "780": "Explore Redridge Mountains",
+        "855": "Explore Moonglade"
+      },
       "mounts": {
         "3111": "Cerulean Prideclaw",
         "3130": "Veteran Adventurer's Loyal Companion"
