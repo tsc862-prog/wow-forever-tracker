@@ -2,19 +2,38 @@
   "characters": {
     "us:belgara-bluemoon": {
       "achievements": {
+        "61997": "Novice Paladin",
+        "62015": "Journeyman Blacksmith",
         "779": "Explore Loch Modan",
+        "780": "Explore Redridge Mountains",
         "855": "Explore Moonglade"
       },
-      "boss_kills": {},
+      "boss_kills": {
+        "15027": {
+          "boss": "Bazzalan",
+          "count": 1,
+          "instance": "Ragefire Chasm"
+        },
+        "63573": {
+          "boss": "Durgen Dirgehammer",
+          "count": 1,
+          "instance": "Hall of Thanes"
+        }
+      },
       "class": "Druid",
       "dungeons": {},
-      "gear": {},
-      "level": 14,
+      "gear": {
+        "252424": {
+          "name": "Black Whelp Slippers",
+          "quality": "RARE"
+        }
+      },
+      "level": 16,
       "professions": {
         "Cooking": 13,
         "Fishing": 1,
-        "Leatherworking": 45,
-        "Skinning": 75
+        "Leatherworking": 58,
+        "Skinning": 77
       },
       "race": "High Order Skyborne",
       "raids": {},
@@ -24,11 +43,6 @@
           "raw": 2135,
           "tier": 3
         },
-        "Darkmoon Faire": {
-          "name": "Neutral",
-          "raw": 0,
-          "tier": 3
-        },
         "Darnassus": {
           "name": "Neutral",
           "raw": 585,
@@ -36,12 +50,12 @@
         },
         "Gadgetzan": {
           "name": "Neutral",
-          "raw": 500,
+          "raw": 600,
           "tier": 3
         },
         "Gnomeregan Exiles": {
           "name": "Neutral",
-          "raw": 2093,
+          "raw": 2493,
           "tier": 3
         },
         "High Order": {
@@ -51,7 +65,7 @@
         },
         "Ironforge": {
           "name": "Neutral",
-          "raw": 2093,
+          "raw": 2593,
           "tier": 3
         },
         "Kirin Tor": {
@@ -72,14 +86,17 @@
       },
       "spec": "Restoration",
       "stats": {
+        "critters": 2,
         "deaths": 2,
-        "drinks": 13,
-        "hearths": 8,
-        "killing_blows": 379,
-        "mobs": 397,
-        "quests": 105
+        "drinks": 35,
+        "hearths": 9,
+        "killing_blows": 388,
+        "mana_potions": 2,
+        "mobs": 494,
+        "need_rolls": 2,
+        "quests": 113
       },
-      "xp": 10982
+      "xp": 4386
     },
     "us:daxii-highwind": {
       "achievements": {},
