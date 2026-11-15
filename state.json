@@ -26,9 +26,13 @@
         "252424": {
           "name": "Black Whelp Slippers",
           "quality": "RARE"
+        },
+        "279895": {
+          "name": "Ironforge Greathammer",
+          "quality": "RARE"
         }
       },
-      "last_login": 1794702369000,
+      "last_login": 1794759842000,
       "level": 16,
       "professions": {
         "Cooking": 13,
@@ -217,7 +221,7 @@
           "quality": "RARE"
         }
       },
-      "last_login": 1794759030000,
+      "last_login": 1794760064000,
       "level": 30,
       "professions": {
         "Blacksmithing": 185,
