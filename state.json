@@ -32,25 +32,25 @@
           "quality": "RARE"
         }
       },
-      "last_login": 1794759842000,
-      "level": 16,
+      "last_login": 1794764830000,
+      "level": 17,
       "professions": {
         "Cooking": 13,
         "Fishing": 1,
         "Leatherworking": 58,
-        "Skinning": 77
+        "Skinning": 84
       },
       "race": "High Order Skyborne",
       "raids": {},
       "reputations": {
         "Cenarion Circle": {
           "name": "Neutral",
-          "raw": 2135,
+          "raw": 2210,
           "tier": 3
         },
         "Darnassus": {
           "name": "Neutral",
-          "raw": 585,
+          "raw": 1207,
           "tier": 3
         },
         "Gadgetzan": {
@@ -60,7 +60,7 @@
         },
         "Gnomeregan Exiles": {
           "name": "Neutral",
-          "raw": 2493,
+          "raw": 2658,
           "tier": 3
         },
         "High Order": {
@@ -70,7 +70,7 @@
         },
         "Ironforge": {
           "name": "Neutral",
-          "raw": 2593,
+          "raw": 2796,
           "tier": 3
         },
         "Kirin Tor": {
@@ -85,23 +85,25 @@
         },
         "Stormwind": {
           "name": "Friendly",
-          "raw": 3118,
+          "raw": 3283,
           "tier": 4
         }
       },
       "spec": "Restoration",
       "stats": {
         "critters": 2,
-        "deaths": 2,
+        "deaths": 4,
         "drinks": 35,
+        "flights": 1,
+        "health_potions": 3,
         "hearths": 9,
-        "killing_blows": 388,
+        "killing_blows": 448,
         "mana_potions": 2,
-        "mobs": 494,
+        "mobs": 554,
         "need_rolls": 2,
-        "quests": 113
+        "quests": 124
       },
-      "xp": 4386
+      "xp": 1620
     },
     "us:daxii-highwind": {
       "achievements": {},
