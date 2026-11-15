@@ -28,6 +28,7 @@
           "quality": "RARE"
         }
       },
+      "last_login": 1794702369000,
       "level": 16,
       "professions": {
         "Cooking": 13,
@@ -104,6 +105,7 @@
       "class": "Shaman",
       "dungeons": {},
       "gear": {},
+      "last_login": 1794460741000,
       "level": 10,
       "professions": {
         "Cooking": 3,
@@ -215,6 +217,7 @@
           "quality": "RARE"
         }
       },
+      "last_login": 1794705634000,
       "level": 30,
       "professions": {
         "Blacksmithing": 185,
@@ -307,6 +310,7 @@
       "class": "Mage",
       "dungeons": {},
       "gear": {},
+      "last_login": 1794702742000,
       "level": 10,
       "professions": {
         "Cooking": 1,
@@ -394,6 +398,7 @@
           "quality": "RARE"
         }
       },
+      "last_login": 1794379926000,
       "level": 27,
       "professions": {
         "Cooking": 88,
