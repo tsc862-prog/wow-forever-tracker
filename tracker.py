@@ -533,12 +533,8 @@ def find_changes(key, old, new, settings, group):
                 icon = "👑" if now["name"].lower() == "exalted" else "🤝"
                 lines.append(f"{icon} Reached **{now['name']}** with {faction}")
 
-    # Achievements
-    old_a, new_a = old.get("achievements"), new.get("achievements")
-    if old_a is not None and new_a is not None:
-        for aid, name in sorted(new_a.items(), key=lambda kv: int(kv[0]) if kv[0].isdigit() else 0):
-            if aid not in old_a:
-                lines.append(f"🎖️ {name}")
+    # Achievements and mounts are shared across a Battle.net account in Forever,
+    # so they're handled per friend in main(), not per character here.
 
     # Gear: every new epic/legendary, and the character's first blue.
     # "gear" in the snapshot is every blue+ item ever seen equipped, so
@@ -560,6 +556,18 @@ def find_changes(key, old, new, settings, group):
     return lines
 
 
+def activity(old, new):
+    """How much a character changed since the last check (0 = not played)."""
+    if not old:
+        return 0
+    score = max(0, (new.get("level") or 0) - (old.get("level") or 0)) * 1_000_000
+    if (new.get("xp") or 0) != (old.get("xp") or 0):
+        score += 1000
+    new_s, old_s = new.get("stats") or {}, old.get("stats") or {}
+    score += sum(abs(v - (old_s.get(k) or 0)) for k, v in new_s.items())
+    return score
+
+
 def merge_gear(old, new):
     """Fold this run's equipped blue+ items into the character's 'ever seen' list."""
     seen = dict((old or {}).get("gear") or {})
@@ -576,7 +584,7 @@ def merge_gear(old, new):
 def keep_baselines(old, new):
     """If a feature failed to load this run, keep last run's data for it."""
     for field in ("professions", "dungeons", "raids", "achievements", "boss_kills", "reputations",
-                  "stats", "spec"):
+                  "stats", "spec", "earned_achievements"):
         if new.get(field) is None and old and old.get(field) is not None:
             new[field] = old[field]
     return new
@@ -649,7 +657,7 @@ def recap_summary(snap):
         "epics": sorted(k for k, v in (snap.get("gear") or {}).items()
                         if QUALITY_RANK.get(v.get("quality"), 0) >= QUALITY_RANK["EPIC"]),
         "rep": {f: r.get("raw") or 0 for f, r in (snap.get("reputations") or {}).items()},
-        "achievements": len(snap.get("achievements") or {}),
+        "achievements": len(snap.get("earned_achievements") or []),
     }
 
 
@@ -927,6 +935,8 @@ def main():
         results = list(pool.map(check, characters))
 
     keyed = []
+    account_wide = {}  # friend -> their shared mounts/achievements and characters seen this run
+    cards = {}         # character key -> (config, snapshot, lines), in config order
     for c, (snap, err) in zip(characters, results):
         key = f"{c.get('region', default_region).lower()}:{char_slug(c)}"
         keyed.append((c, key))
@@ -948,22 +958,16 @@ def main():
         else:
             lines = find_changes(key, old, snap, settings, state["group"])
 
-        # Mounts are account-wide: track them per friend, so a new mount is
-        # posted once (on whichever character saw it first), not once per alt.
+        # Mounts and achievements are account-wide: gather them per friend and
+        # credit new ones below to whichever character was actually played.
+        owner_key = (c.get("owner") or key).lower()
+        shared = account_wide.setdefault(owner_key, {"mounts": {}, "achievements": {}, "chars": []})
         mounts = snap.pop("_mounts", None)
         if mounts is not None:
-            owner_key = (c.get("owner") or key).lower()
-            known = owners.setdefault(owner_key, {}).get("mounts")
-            if known is None or old is None:
-                owners[owner_key]["mounts"] = {**(known or {}), **mounts}
-            else:
-                for mid, mname in sorted(mounts.items(), key=lambda kv: kv[1]):
-                    if mid not in known:
-                        lines.append(f"🐎 New mount: **{mname}**")
-                        known[mid] = mname
-
-        if lines:
-            embeds.append(character_embed(c, snap, lines, settings))
+            shared["mounts"].update(mounts)
+        shared["achievements"].update(snap.get("achievements") or {})
+        shared["chars"].append((c, key, snap, activity(old, snap), old is None))
+        cards[key] = (c, snap, lines)
         merge_gear(old, snap)
         state["characters"][key] = keep_baselines(old, snap)
         if key not in weekly["baseline"]:
@@ -972,6 +976,29 @@ def main():
             # friend added later, counts from when the tracker first saw them.
             fresh = (snap.get("level") or 0) <= NEW_CHARACTER_MAX_LEVEL
             weekly["baseline"][key] = dict(LAUNCH_BASELINE) if fresh else recap_summary(state["characters"][key])
+
+    # Credit new account-wide unlocks once per friend, to the character that
+    # changed the most since the last check (the one that was just played).
+    for owner_key, shared in account_wide.items():
+        known = owners.setdefault(owner_key, {})
+        played = sorted((x for x in shared["chars"] if x[3] > 0), key=lambda x: -x[3])
+        target = (played or [x for x in shared["chars"] if not x[4]] or shared["chars"])[0]
+        for kind, icon in (("mounts", "🐎 New mount: **{}**"), ("achievements", "🎖️ {}")):
+            have = known.get(kind)
+            if have is None:  # first time seeing this friend's account: record quietly
+                known[kind] = dict(shared[kind])
+                continue
+            fresh = sorted((k for k in shared[kind] if k not in have), key=lambda k: shared[kind][k])
+            for k in fresh:
+                have[k] = shared[kind][k]
+                cards[target[1]][2].append(icon.format(shared[kind][k]))
+                if kind == "achievements":
+                    earned = state["characters"][target[1]].setdefault("earned_achievements", [])
+                    earned.append(shared[kind][k])
+
+    for c, snap, lines in cards.values():
+        if lines:
+            embeds.append(character_embed(c, snap, lines, settings))
 
     if unavailable:
         print("[info] No Blizzard data yet for: " + ", ".join(unavailable))
