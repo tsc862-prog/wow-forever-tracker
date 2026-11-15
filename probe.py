@@ -123,7 +123,7 @@ def main():
         print("\n== All achievements (done or in progress) ==")
         s, b = get(region, working + "/achievements", token, ns)
         for a in (b or {}).get("achievements") or []:
-            print(f"   {'DONE' if a.get('completed_timestamp') else '....'} {a.get('id')} {t.name_of(a.get('achievement'))}")
+            print(f"   {'DONE' if a.get('completed_timestamp') else '....'} {a.get('id')} {t.name_of(a.get('achievement'))} ts={a.get('completed_timestamp')}")
         for cp in (b or {}).get("category_progress") or []:
             print(f"   category: {t.name_of(cp.get('category'))} quantity={cp.get('quantity')} points={cp.get('points')}")
         for ev in (b or {}).get("recent_events") or []:
