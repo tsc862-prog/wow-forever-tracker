@@ -511,147 +511,199 @@
   "weekly": {
     "baseline": {
       "us:belgara-bluemoon": {
-        "achievements": 1,
-        "clears": {},
+        "achievements": 0,
+        "clears": {
+          "Hall of Thanes": 1
+        },
         "epics": [],
-        "level": 10,
+        "level": 17,
         "professions": {
           "Cooking": 13,
           "Fishing": 1,
-          "Leatherworking": 29,
-          "Skinning": 65
+          "Leatherworking": 58,
+          "Skinning": 84
         },
         "rep": {
-          "Cenarion Circle": 2100,
-          "Darnassus": 500,
-          "Gnomeregan Exiles": 2000,
-          "High Order": 4965,
-          "Ironforge": 2000,
-          "Kirin Tor": 3000,
-          "Nightclaw Druids": 100,
-          "Stormwind": 3100
+          "Cenarion Circle": 2210,
+          "Darnassus": 1207,
+          "Gadgetzan": 600,
+          "Gnomeregan Exiles": 2658,
+          "High Order": 5985,
+          "Ironforge": 2796,
+          "Kirin Tor": 3100,
+          "Nightclaw Druids": 5300,
+          "Stormwind": 3283
         },
         "stats": {
-          "deaths": 2,
-          "drinks": 11,
-          "hearths": 4,
-          "killing_blows": 212,
-          "mobs": 223,
-          "quests": 52
+          "critters": 2,
+          "deaths": 4,
+          "drinks": 35,
+          "flights": 1,
+          "health_potions": 3,
+          "hearths": 9,
+          "killing_blows": 448,
+          "mana_potions": 2,
+          "mobs": 554,
+          "need_rolls": 2,
+          "quests": 124
         },
-        "xp": 5654
+        "xp": 1620
       },
       "us:daxii-highwind": {
         "achievements": 0,
         "clears": {},
         "epics": [],
-        "level": 1,
-        "professions": {},
-        "rep": {},
-        "stats": {},
-        "xp": 0
-      },
-      "us:hefe-weizenson": {
-        "achievements": 1,
-        "clears": {
-          "Hall of Thanes": 1,
-          "The Deadmines": 1
-        },
-        "epics": [],
-        "level": 22,
+        "level": 10,
         "professions": {
-          "Blacksmithing": 120,
-          "Cooking": 78,
-          "First Aid": 14,
-          "Fishing": 1,
-          "Mining": 121
+          "Cooking": 3,
+          "First Aid": 18,
+          "Leatherworking": 26,
+          "Skinning": 56
         },
         "rep": {
-          "Darnassus": 4442,
-          "Gadgetzan": 600,
-          "Gnomeregan Exiles": 8602,
-          "Ironforge": 11703,
-          "Silverwing Sentinels": 255,
-          "Stormwind": 6143
+          "Darnassus": 3137,
+          "Gnomeregan Exiles": 5628,
+          "Ironforge": 6528,
+          "Stormwind": 3137
         },
         "stats": {
-          "critters": 20,
-          "deaths": 19,
-          "drinks": 50,
-          "flights": 14,
-          "food": 15,
-          "health_potions": 33,
-          "hearths": 12,
-          "honorable_kills": 50,
-          "killing_blows": 730,
-          "mana_potions": 9,
-          "mobs": 1672,
-          "need_rolls": 9,
-          "quests": 150
+          "critters": 4,
+          "deaths": 8,
+          "drinks": 7,
+          "food": 11,
+          "health_potions": 1,
+          "hearths": 2,
+          "killing_blows": 232,
+          "mobs": 256,
+          "quests": 40
         },
-        "xp": 6050
+        "xp": 4277
+      },
+      "us:hefe-weizenson": {
+        "achievements": 0,
+        "clears": {
+          "Hall of Thanes": 1,
+          "The Deadmines": 2,
+          "The Stockade": 1
+        },
+        "epics": [],
+        "level": 30,
+        "professions": {
+          "Blacksmithing": 185,
+          "Cooking": 150,
+          "First Aid": 14,
+          "Fishing": 1,
+          "Mining": 141
+        },
+        "rep": {
+          "Azeroth Commerce Authority": 2000,
+          "Bloodsail Buccaneers": -6525,
+          "Darkmoon Faire": 50,
+          "Darnassus": 6157,
+          "Gadgetzan": 600,
+          "Gnomeregan Exiles": 10268,
+          "Ironforge": 13906,
+          "Silverwing Sentinels": 255,
+          "Stormwind": 12065,
+          "Wildhammer Clan": 700
+        },
+        "stats": {
+          "critters": 23,
+          "deaths": 26,
+          "drinks": 116,
+          "flights": 29,
+          "food": 23,
+          "health_potions": 46,
+          "hearths": 22,
+          "honorable_kills": 50,
+          "killing_blows": 1245,
+          "mana_potions": 14,
+          "mobs": 3002,
+          "need_rolls": 13,
+          "quests": 272
+        },
+        "xp": 22892
       },
       "us:kolsch-conjurer": {
         "achievements": 0,
         "clears": {},
         "epics": [],
-        "level": 1,
-        "professions": {},
-        "rep": {},
-        "stats": {},
-        "xp": 0
-      },
-      "us:tired-mexican": {
-        "achievements": 1,
-        "clears": {
-          "Hall of Thanes": 1,
-          "The Deadmines": 1
-        },
-        "epics": [],
-        "level": 21,
+        "level": 10,
         "professions": {
-          "Cooking": 23,
-          "Engineering": 101,
-          "First Aid": 1,
-          "Fishing": 20,
-          "Mining": 102
+          "Cooking": 1,
+          "Enchanting": 38,
+          "Tailoring": 50
         },
         "rep": {
-          "Azeroth Commerce Authority": 0,
-          "Darnassus": 4290,
-          "Gadgetzan": 600,
-          "Gnomeregan Exiles": 8468,
-          "Ironforge": 11401,
-          "Silverwing Sentinels": 255,
-          "Stormwind": 5590
+          "Darnassus": 3112,
+          "Gnomeregan Exiles": 3112,
+          "Ironforge": 3112,
+          "Stormwind": 6900
         },
         "stats": {
-          "critters": 21,
-          "deaths": 23,
-          "drinks": 24,
-          "flights": 26,
-          "food": 22,
-          "health_potions": 10,
-          "hearths": 6,
-          "honorable_kills": 52,
-          "killing_blows": 936,
-          "mana_potions": 1,
-          "mobs": 1569,
-          "need_rolls": 20,
-          "quests": 142
+          "deaths": 6,
+          "drinks": 37,
+          "food": 14,
+          "health_potions": 1,
+          "killing_blows": 195,
+          "mobs": 201,
+          "quests": 55
         },
-        "xp": 16326
+        "xp": 4325
+      },
+      "us:tired-mexican": {
+        "achievements": 0,
+        "clears": {
+          "Hall of Thanes": 1,
+          "The Deadmines": 1,
+          "The Stockade": 1
+        },
+        "epics": [],
+        "level": 27,
+        "professions": {
+          "Cooking": 88,
+          "Engineering": 151,
+          "First Aid": 1,
+          "Fishing": 20,
+          "Mining": 125
+        },
+        "rep": {
+          "Azeroth Commerce Authority": 2000,
+          "Darkmoon Faire": 550,
+          "Darnassus": 5513,
+          "Gadgetzan": 600,
+          "Gnomeregan Exiles": 9850,
+          "Ironforge": 13087,
+          "Silverwing Sentinels": 255,
+          "Stormwind": 10090
+        },
+        "stats": {
+          "critters": 25,
+          "deaths": 28,
+          "drinks": 40,
+          "flights": 41,
+          "food": 31,
+          "health_potions": 13,
+          "hearths": 9,
+          "honorable_kills": 52,
+          "killing_blows": 1539,
+          "mana_potions": 3,
+          "mobs": 2660,
+          "need_rolls": 26,
+          "quests": 221
+        },
+        "xp": 29990
       }
     },
     "last_awards": [
+      "clears",
       "potions",
-      "need_rolls",
+      "killing_blows",
+      "rep",
       "hearths",
-      "flights",
-      "snacks",
-      "crafter"
+      "need_rolls"
     ],
-    "last_recap": "2026-11-09T03:00:21.982362+00:00",
-    "recaps_posted": 1
+    "last_recap": "2026-11-16T03:00:24.018686+00:00",
+    "recaps_posted": 2
   }
 }
