@@ -223,7 +223,7 @@
           "quality": "RARE"
         }
       },
-      "last_login": 1794848215000,
+      "last_login": 1794870314000,
       "level": 30,
       "professions": {
         "Blacksmithing": 185,
@@ -299,7 +299,6 @@
         "killing_blows": 1245,
         "mana_potions": 14,
         "mobs": 3002,
-        "need_rolls": 13,
         "quests": 272
       },
       "xp": 22892
