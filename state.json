@@ -4,6 +4,7 @@
       "achievements": {
         "61997": "Novice Paladin",
         "62015": "Journeyman Blacksmith",
+        "62028": "Journeyman Tailor",
         "779": "Explore Loch Modan",
         "780": "Explore Redridge Mountains",
         "855": "Explore Moonglade"
@@ -32,7 +33,7 @@
           "quality": "RARE"
         }
       },
-      "last_login": 1794764830000,
+      "last_login": 1794956775000,
       "level": 17,
       "professions": {
         "Cooking": 13,
@@ -50,7 +51,7 @@
         },
         "Darnassus": {
           "name": "Neutral",
-          "raw": 1207,
+          "raw": 1757,
           "tier": 3
         },
         "Gadgetzan": {
@@ -60,7 +61,7 @@
         },
         "Gnomeregan Exiles": {
           "name": "Neutral",
-          "raw": 2658,
+          "raw": 2796,
           "tier": 3
         },
         "High Order": {
@@ -70,7 +71,7 @@
         },
         "Ironforge": {
           "name": "Neutral",
-          "raw": 2796,
+          "raw": 2933,
           "tier": 3
         },
         "Kirin Tor": {
@@ -85,7 +86,7 @@
         },
         "Stormwind": {
           "name": "Friendly",
-          "raw": 3283,
+          "raw": 3421,
           "tier": 4
         }
       },
@@ -97,13 +98,12 @@
         "flights": 1,
         "health_potions": 3,
         "hearths": 9,
-        "killing_blows": 448,
-        "mana_potions": 2,
-        "mobs": 554,
-        "need_rolls": 2,
-        "quests": 124
+        "killing_blows": 493,
+        "mana_potions": 3,
+        "mobs": 599,
+        "quests": 130
       },
-      "xp": 1620
+      "xp": 10854
     },
     "us:daxii-highwind": {
       "achievements": {},
