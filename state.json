@@ -161,6 +161,7 @@
       "achievements": {
         "61997": "Novice Paladin",
         "62015": "Journeyman Blacksmith",
+        "62028": "Journeyman Tailor",
         "779": "Explore Loch Modan",
         "780": "Explore Redridge Mountains",
         "855": "Explore Moonglade"
@@ -223,7 +224,7 @@
           "quality": "RARE"
         }
       },
-      "last_login": 1794951769000,
+      "last_login": 1794953951000,
       "level": 30,
       "professions": {
         "Blacksmithing": 185,
