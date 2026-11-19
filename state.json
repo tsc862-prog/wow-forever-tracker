@@ -408,14 +408,14 @@
           "quality": "RARE"
         }
       },
-      "last_login": 1794379926000,
-      "level": 27,
+      "last_login": 1795113702000,
+      "level": 28,
       "professions": {
         "Cooking": 88,
         "Engineering": 151,
         "First Aid": 1,
         "Fishing": 20,
-        "Mining": 125
+        "Mining": 126
       },
       "race": "Dwarf",
       "raids": {},
@@ -425,6 +425,11 @@
           "raw": 2000,
           "tier": 3
         },
+        "Booty Bay": {
+          "name": "Neutral",
+          "raw": 500,
+          "tier": 3
+        },
         "Darkmoon Faire": {
           "name": "Neutral",
           "raw": 550,
@@ -432,7 +437,7 @@
         },
         "Darnassus": {
           "name": "Friendly",
-          "raw": 5513,
+          "raw": 5751,
           "tier": 4
         },
         "Gadgetzan": {
@@ -442,12 +447,12 @@
         },
         "Gnomeregan Exiles": {
           "name": "Honored",
-          "raw": 9850,
+          "raw": 10087,
           "tier": 5
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 13087,
+          "raw": 13700,
           "tier": 5
         },
         "Silverwing Sentinels": {
@@ -457,7 +462,7 @@
         },
         "Stormwind": {
           "name": "Honored",
-          "raw": 10090,
+          "raw": 10665,
           "tier": 5
         }
       },
@@ -465,19 +470,18 @@
       "stats": {
         "critters": 25,
         "deaths": 28,
-        "drinks": 40,
-        "flights": 41,
-        "food": 31,
-        "health_potions": 13,
-        "hearths": 9,
+        "drinks": 42,
+        "flights": 43,
+        "food": 34,
+        "health_potions": 15,
+        "hearths": 10,
         "honorable_kills": 52,
-        "killing_blows": 1539,
+        "killing_blows": 1615,
         "mana_potions": 3,
-        "mobs": 2660,
-        "need_rolls": 26,
-        "quests": 221
+        "mobs": 2736,
+        "quests": 235
       },
-      "xp": 29990
+      "xp": 35139
     }
   },
   "group": {},
