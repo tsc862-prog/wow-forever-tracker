@@ -408,14 +408,14 @@
           "quality": "RARE"
         }
       },
-      "last_login": 1795113702000,
-      "level": 28,
+      "last_login": 1795118184000,
+      "level": 29,
       "professions": {
         "Cooking": 88,
         "Engineering": 151,
         "First Aid": 1,
         "Fishing": 20,
-        "Mining": 126
+        "Mining": 128
       },
       "race": "Dwarf",
       "raids": {},
@@ -423,11 +423,6 @@
         "Azeroth Commerce Authority": {
           "name": "Neutral",
           "raw": 2000,
-          "tier": 3
-        },
-        "Booty Bay": {
-          "name": "Neutral",
-          "raw": 500,
           "tier": 3
         },
         "Darkmoon Faire": {
@@ -476,12 +471,12 @@
         "health_potions": 15,
         "hearths": 10,
         "honorable_kills": 52,
-        "killing_blows": 1615,
+        "killing_blows": 1643,
         "mana_potions": 3,
-        "mobs": 2736,
+        "mobs": 2765,
         "quests": 235
       },
-      "xp": 35139
+      "xp": 785
     }
   },
   "group": {},
