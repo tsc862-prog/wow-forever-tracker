@@ -224,7 +224,7 @@
           "quality": "RARE"
         }
       },
-      "last_login": 1795203110000,
+      "last_login": 1795207008000,
       "level": 30,
       "professions": {
         "Blacksmithing": 191,
@@ -413,14 +413,14 @@
           "quality": "RARE"
         }
       },
-      "last_login": 1795203024000,
+      "last_login": 1795206628000,
       "level": 30,
       "professions": {
         "Cooking": 88,
         "Engineering": 151,
         "First Aid": 175,
         "Fishing": 20,
-        "Mining": 142
+        "Mining": 147
       },
       "race": "Dwarf",
       "raids": {},
@@ -469,24 +469,29 @@
           "name": "Honored",
           "raw": 10846,
           "tier": 5
+        },
+        "Wildhammer Clan": {
+          "name": "Neutral",
+          "raw": 700,
+          "tier": 3
         }
       },
       "spec": "Marksmanship",
       "stats": {
         "critters": 25,
         "deaths": 29,
-        "drinks": 45,
+        "drinks": 46,
         "flights": 48,
-        "food": 39,
+        "food": 41,
         "health_potions": 17,
         "hearths": 11,
         "honorable_kills": 52,
-        "killing_blows": 1711,
+        "killing_blows": 1759,
         "mana_potions": 4,
-        "mobs": 2961,
-        "quests": 244
+        "mobs": 3010,
+        "quests": 248
       },
-      "xp": 5622
+      "xp": 23671
     }
   },
   "group": {},
