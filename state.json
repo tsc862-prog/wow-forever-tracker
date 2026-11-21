@@ -199,6 +199,10 @@
           "name": "Protector's Silvered Chain Helm",
           "quality": "RARE"
         },
+        "271716": {
+          "name": "Explorer's League Dustcover",
+          "quality": "RARE"
+        },
         "273297": {
           "name": "Goblin Hammer",
           "quality": "RARE"
@@ -224,14 +228,14 @@
           "quality": "RARE"
         }
       },
-      "last_login": 1795213651000,
-      "level": 30,
+      "last_login": 1795232666000,
+      "level": 31,
       "professions": {
         "Blacksmithing": 191,
         "Cooking": 150,
         "First Aid": 14,
         "Fishing": 1,
-        "Mining": 141
+        "Mining": 144
       },
       "race": "Dwarf",
       "raids": {},
@@ -253,7 +257,7 @@
         },
         "Darnassus": {
           "name": "Friendly",
-          "raw": 6157,
+          "raw": 6238,
           "tier": 4
         },
         "Gadgetzan": {
@@ -263,12 +267,12 @@
         },
         "Gnomeregan Exiles": {
           "name": "Honored",
-          "raw": 10268,
+          "raw": 10350,
           "tier": 5
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 13906,
+          "raw": 14193,
           "tier": 5
         },
         "Silverwing Sentinels": {
@@ -278,7 +282,7 @@
         },
         "Stormwind": {
           "name": "Honored",
-          "raw": 12065,
+          "raw": 12183,
           "tier": 5
         },
         "Wildhammer Clan": {
@@ -289,20 +293,20 @@
       },
       "spec": "Protection",
       "stats": {
-        "critters": 23,
-        "deaths": 26,
-        "drinks": 116,
-        "flights": 29,
+        "critters": 26,
+        "deaths": 28,
+        "drinks": 122,
+        "flights": 32,
         "food": 23,
         "health_potions": 46,
-        "hearths": 22,
+        "hearths": 23,
         "honorable_kills": 50,
-        "killing_blows": 1245,
+        "killing_blows": 1329,
         "mana_potions": 14,
-        "mobs": 3002,
-        "quests": 272
+        "mobs": 3157,
+        "quests": 284
       },
-      "xp": 22892
+      "xp": 31498
     },
     "us:kolsch-conjurer": {
       "achievements": {
