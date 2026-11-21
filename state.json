@@ -367,6 +367,7 @@
       "achievements": {
         "61989": "Novice Hunter",
         "62021": "Journeyman Engineer",
+        "778": "Explore Duskwood",
         "779": "Explore Loch Modan",
         "780": "Explore Redridge Mountains"
       },
@@ -399,6 +400,9 @@
       },
       "class": "Hunter",
       "dungeons": {},
+      "earned_achievements": [
+        "Explore Duskwood"
+      ],
       "gear": {
         "12988": {
           "name": "Starsight Tunic",
@@ -408,19 +412,31 @@
           "name": "Goblin Screwdriver",
           "quality": "RARE"
         },
+        "271716": {
+          "name": "Explorer's League Dustcover",
+          "quality": "RARE"
+        },
+        "273022": {
+          "name": "Supple Bellyskin Leggings",
+          "quality": "RARE"
+        },
+        "273026": {
+          "name": "Garb of Florid Feathers",
+          "quality": "RARE"
+        },
         "5199": {
           "name": "Smelting Pants",
           "quality": "RARE"
         }
       },
-      "last_login": 1795206628000,
-      "level": 30,
+      "last_login": 1795229438000,
+      "level": 32,
       "professions": {
         "Cooking": 88,
         "Engineering": 151,
         "First Aid": 175,
         "Fishing": 20,
-        "Mining": 147
+        "Mining": 150
       },
       "race": "Dwarf",
       "raids": {},
@@ -432,7 +448,12 @@
         },
         "Azeroth Commerce Authority": {
           "name": "Neutral",
-          "raw": 2000,
+          "raw": 2075,
+          "tier": 3
+        },
+        "Booty Bay": {
+          "name": "Neutral",
+          "raw": 500,
           "tier": 3
         },
         "Darkmoon Faire": {
@@ -442,7 +463,7 @@
         },
         "Darnassus": {
           "name": "Friendly",
-          "raw": 6338,
+          "raw": 6838,
           "tier": 4
         },
         "Gadgetzan": {
@@ -452,12 +473,12 @@
         },
         "Gnomeregan Exiles": {
           "name": "Honored",
-          "raw": 10212,
+          "raw": 10712,
           "tier": 5
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 14031,
+          "raw": 14662,
           "tier": 5
         },
         "Silverwing Sentinels": {
@@ -467,31 +488,41 @@
         },
         "Stormwind": {
           "name": "Honored",
-          "raw": 10846,
+          "raw": 12115,
           "tier": 5
+        },
+        "The League of Arathor": {
+          "name": "Neutral",
+          "raw": 0,
+          "tier": 3
+        },
+        "Theramore Expeditionary Force": {
+          "name": "Neutral",
+          "raw": 0,
+          "tier": 3
         },
         "Wildhammer Clan": {
           "name": "Neutral",
-          "raw": 700,
+          "raw": 900,
           "tier": 3
         }
       },
       "spec": "Marksmanship",
       "stats": {
-        "critters": 25,
-        "deaths": 29,
-        "drinks": 46,
-        "flights": 48,
-        "food": 41,
-        "health_potions": 17,
-        "hearths": 11,
+        "critters": 29,
+        "deaths": 33,
+        "drinks": 59,
+        "flights": 60,
+        "food": 47,
+        "health_potions": 20,
+        "hearths": 13,
         "honorable_kills": 52,
-        "killing_blows": 1759,
+        "killing_blows": 1868,
         "mana_potions": 4,
-        "mobs": 3010,
-        "quests": 248
+        "mobs": 3267,
+        "quests": 300
       },
-      "xp": 23671
+      "xp": 38614
     }
   },
   "group": {},
@@ -500,6 +531,7 @@
       "achievements": {
         "61989": "Novice Hunter",
         "62021": "Journeyman Engineer",
+        "778": "Explore Duskwood",
         "779": "Explore Loch Modan",
         "780": "Explore Redridge Mountains"
       },
