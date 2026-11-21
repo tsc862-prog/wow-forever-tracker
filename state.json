@@ -164,6 +164,7 @@
         "62028": "Journeyman Tailor",
         "779": "Explore Loch Modan",
         "780": "Explore Redridge Mountains",
+        "841": "Explore Wetlands",
         "855": "Explore Moonglade"
       },
       "boss_kills": {
@@ -190,6 +191,9 @@
       },
       "class": "Paladin",
       "dungeons": {},
+      "earned_achievements": [
+        "Explore Wetlands"
+      ],
       "gear": {
         "250524": {
           "name": "Guard's Silvered Chain Leggings",
@@ -211,6 +215,10 @@
           "name": "Repurposed Rack",
           "quality": "RARE"
         },
+        "281321": {
+          "name": "Giantstone Medallion",
+          "quality": "RARE"
+        },
         "284715": {
           "name": "First Mate Band",
           "quality": "RARE"
@@ -228,14 +236,14 @@
           "quality": "RARE"
         }
       },
-      "last_login": 1795232666000,
-      "level": 31,
+      "last_login": 1795295540000,
+      "level": 33,
       "professions": {
         "Blacksmithing": 191,
         "Cooking": 150,
         "First Aid": 14,
         "Fishing": 1,
-        "Mining": 144
+        "Mining": 149
       },
       "race": "Dwarf",
       "raids": {},
@@ -250,6 +258,11 @@
           "raw": -6525,
           "tier": 0
         },
+        "Booty Bay": {
+          "name": "Neutral",
+          "raw": 500,
+          "tier": 3
+        },
         "Darkmoon Faire": {
           "name": "Neutral",
           "raw": 50,
@@ -257,7 +270,7 @@
         },
         "Darnassus": {
           "name": "Friendly",
-          "raw": 6238,
+          "raw": 6666,
           "tier": 4
         },
         "Gadgetzan": {
@@ -267,12 +280,12 @@
         },
         "Gnomeregan Exiles": {
           "name": "Honored",
-          "raw": 10350,
+          "raw": 10777,
           "tier": 5
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 14193,
+          "raw": 15303,
           "tier": 5
         },
         "Silverwing Sentinels": {
@@ -282,31 +295,31 @@
         },
         "Stormwind": {
           "name": "Honored",
-          "raw": 12183,
+          "raw": 13211,
           "tier": 5
         },
         "Wildhammer Clan": {
           "name": "Neutral",
-          "raw": 700,
+          "raw": 1060,
           "tier": 3
         }
       },
       "spec": "Protection",
       "stats": {
         "critters": 26,
-        "deaths": 28,
-        "drinks": 122,
-        "flights": 32,
-        "food": 23,
-        "health_potions": 46,
-        "hearths": 23,
+        "deaths": 30,
+        "drinks": 126,
+        "flights": 35,
+        "food": 27,
+        "health_potions": 50,
+        "hearths": 25,
         "honorable_kills": 50,
-        "killing_blows": 1329,
+        "killing_blows": 1422,
         "mana_potions": 14,
-        "mobs": 3157,
-        "quests": 284
+        "mobs": 3334,
+        "quests": 320
       },
-      "xp": 31498
+      "xp": 26182
     },
     "us:kolsch-conjurer": {
       "achievements": {
@@ -555,6 +568,7 @@
         "62028": "Journeyman Tailor",
         "779": "Explore Loch Modan",
         "780": "Explore Redridge Mountains",
+        "841": "Explore Wetlands",
         "855": "Explore Moonglade"
       },
       "mounts": {
