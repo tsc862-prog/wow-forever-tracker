@@ -278,14 +278,14 @@
           "quality": "RARE"
         }
       },
-      "last_login": 1795450317000,
+      "last_login": 1795475790000,
       "level": 34,
       "professions": {
         "Blacksmithing": 191,
         "Cooking": 150,
         "First Aid": 14,
         "Fishing": 1,
-        "Mining": 149
+        "Mining": 154
       },
       "race": "Dwarf",
       "raids": {},
@@ -307,7 +307,7 @@
         },
         "Darnassus": {
           "name": "Friendly",
-          "raw": 6985,
+          "raw": 7010,
           "tier": 4
         },
         "Gadgetzan": {
@@ -317,12 +317,12 @@
         },
         "Gnomeregan Exiles": {
           "name": "Honored",
-          "raw": 11096,
+          "raw": 11121,
           "tier": 5
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 15622,
+          "raw": 15647,
           "tier": 5
         },
         "Silverwing Sentinels": {
@@ -332,7 +332,7 @@
         },
         "Stormwind": {
           "name": "Honored",
-          "raw": 13886,
+          "raw": 13986,
           "tier": 5
         },
         "Wildhammer Clan": {
@@ -345,18 +345,18 @@
       "stats": {
         "critters": 26,
         "deaths": 30,
-        "drinks": 135,
-        "flights": 35,
-        "food": 29,
+        "drinks": 142,
+        "flights": 36,
+        "food": 31,
         "health_potions": 53,
-        "hearths": 25,
+        "hearths": 26,
         "honorable_kills": 50,
-        "killing_blows": 1478,
+        "killing_blows": 1556,
         "mana_potions": 14,
-        "mobs": 3394,
-        "quests": 332
+        "mobs": 3475,
+        "quests": 344
       },
-      "xp": 7032
+      "xp": 51072
     },
     "us:kolsch-conjurer": {
       "achievements": {
