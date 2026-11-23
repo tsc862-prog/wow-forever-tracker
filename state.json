@@ -377,7 +377,7 @@
         "Journeyman Enchanter"
       ],
       "gear": {},
-      "last_login": 1795450639000,
+      "last_login": 1795469164000,
       "level": 10,
       "professions": {
         "Cooking": 1,
@@ -408,7 +408,7 @@
           "tier": 4
         }
       },
-      "spec": null,
+      "spec": "Arcane",
       "stats": {
         "deaths": 6,
         "drinks": 37,
