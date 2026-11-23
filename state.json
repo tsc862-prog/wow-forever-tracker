@@ -202,6 +202,7 @@
       "achievements": {
         "61997": "Novice Paladin",
         "62015": "Journeyman Blacksmith",
+        "62018": "Journeyman Enchanter",
         "62028": "Journeyman Tailor",
         "779": "Explore Loch Modan",
         "780": "Explore Redridge Mountains",
@@ -277,7 +278,7 @@
           "quality": "RARE"
         }
       },
-      "last_login": 1795309070000,
+      "last_login": 1795450317000,
       "level": 34,
       "professions": {
         "Blacksmithing": 191,
@@ -376,7 +377,7 @@
         "Journeyman Enchanter"
       ],
       "gear": {},
-      "last_login": 1795360670000,
+      "last_login": 1795450639000,
       "level": 10,
       "professions": {
         "Cooking": 1,
