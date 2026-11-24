@@ -220,6 +220,11 @@
           "count": 1,
           "instance": "Stormwind Stockade"
         },
+        "6140": {
+          "boss": "Mekgineer Thermaplugg",
+          "count": 1,
+          "instance": "Gnomeregan"
+        },
         "63570": {
           "boss": "Edwin VanCleef",
           "count": 2,
@@ -276,16 +281,24 @@
         "5193": {
           "name": "Cape of the Brotherhood",
           "quality": "RARE"
+        },
+        "9446": {
+          "name": "Electrocutioner Leg",
+          "quality": "RARE"
+        },
+        "9538": {
+          "name": "Talvash's Gold Ring",
+          "quality": "RARE"
         }
       },
-      "last_login": 1795475790000,
-      "level": 34,
+      "last_login": 1795502466000,
+      "level": 36,
       "professions": {
         "Blacksmithing": 191,
         "Cooking": 150,
         "First Aid": 14,
         "Fishing": 1,
-        "Mining": 154
+        "Mining": 187
       },
       "race": "Dwarf",
       "raids": {},
@@ -300,6 +313,11 @@
           "raw": -6525,
           "tier": 0
         },
+        "Booty Bay": {
+          "name": "Neutral",
+          "raw": 500,
+          "tier": 3
+        },
         "Darkmoon Faire": {
           "name": "Neutral",
           "raw": 50,
@@ -307,7 +325,7 @@
         },
         "Darnassus": {
           "name": "Friendly",
-          "raw": 7010,
+          "raw": 7210,
           "tier": 4
         },
         "Gadgetzan": {
@@ -317,12 +335,12 @@
         },
         "Gnomeregan Exiles": {
           "name": "Honored",
-          "raw": 11121,
+          "raw": 11758,
           "tier": 5
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 15647,
+          "raw": 15947,
           "tier": 5
         },
         "Silverwing Sentinels": {
@@ -332,31 +350,31 @@
         },
         "Stormwind": {
           "name": "Honored",
-          "raw": 13986,
+          "raw": 14448,
           "tier": 5
         },
         "Wildhammer Clan": {
           "name": "Neutral",
-          "raw": 1060,
+          "raw": 1485,
           "tier": 3
         }
       },
       "spec": "Protection",
       "stats": {
         "critters": 26,
-        "deaths": 30,
-        "drinks": 142,
-        "flights": 36,
-        "food": 31,
-        "health_potions": 53,
-        "hearths": 26,
+        "deaths": 31,
+        "drinks": 150,
+        "flights": 42,
+        "food": 32,
+        "health_potions": 56,
+        "hearths": 27,
         "honorable_kills": 50,
-        "killing_blows": 1556,
-        "mana_potions": 14,
-        "mobs": 3475,
-        "quests": 344
+        "killing_blows": 1759,
+        "mana_potions": 15,
+        "mobs": 4020,
+        "quests": 358
       },
-      "xp": 51072
+      "xp": 3702
     },
     "us:kolsch-conjurer": {
       "achievements": {
