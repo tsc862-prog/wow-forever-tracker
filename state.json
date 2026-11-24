@@ -202,6 +202,7 @@
       "achievements": {
         "61997": "Novice Paladin",
         "62015": "Journeyman Blacksmith",
+        "62016": "Expert Blacksmith",
         "62018": "Journeyman Enchanter",
         "62028": "Journeyman Tailor",
         "779": "Explore Loch Modan",
@@ -239,7 +240,8 @@
       "class": "Paladin",
       "dungeons": {},
       "earned_achievements": [
-        "Explore Wetlands"
+        "Explore Wetlands",
+        "Expert Blacksmith"
       ],
       "gear": {
         "250524": {
@@ -291,10 +293,10 @@
           "quality": "RARE"
         }
       },
-      "last_login": 1795544801000,
+      "last_login": 1795552817000,
       "level": 36,
       "professions": {
-        "Blacksmithing": 207,
+        "Blacksmithing": 225,
         "Cooking": 150,
         "First Aid": 14,
         "Fishing": 1,
@@ -626,6 +628,7 @@
       "achievements": {
         "61997": "Novice Paladin",
         "62015": "Journeyman Blacksmith",
+        "62016": "Expert Blacksmith",
         "62018": "Journeyman Enchanter",
         "62028": "Journeyman Tailor",
         "779": "Explore Loch Modan",
