@@ -444,7 +444,9 @@
         "62021": "Journeyman Engineer",
         "778": "Explore Duskwood",
         "779": "Explore Loch Modan",
-        "780": "Explore Redridge Mountains"
+        "780": "Explore Redridge Mountains",
+        "841": "Explore Wetlands",
+        "846": "Explore Thousand Needles"
       },
       "boss_kills": {
         "15027": {
@@ -462,6 +464,11 @@
           "count": 1,
           "instance": "Blackfathom Deeps"
         },
+        "6140": {
+          "boss": "Mekgineer Thermaplugg",
+          "count": 1,
+          "instance": "Gnomeregan"
+        },
         "63570": {
           "boss": "Edwin VanCleef",
           "count": 1,
@@ -476,7 +483,9 @@
       "class": "Hunter",
       "dungeons": {},
       "earned_achievements": [
-        "Explore Duskwood"
+        "Explore Duskwood",
+        "Explore Thousand Needles",
+        "Explore Wetlands"
       ],
       "gear": {
         "12988": {
@@ -502,16 +511,28 @@
         "5199": {
           "name": "Smelting Pants",
           "quality": "RARE"
+        },
+        "9453": {
+          "name": "Toxic Revenger",
+          "quality": "RARE"
+        },
+        "9538": {
+          "name": "Talvash's Gold Ring",
+          "quality": "RARE"
+        },
+        "9624": {
+          "name": "Triprunner Dungarees",
+          "quality": "RARE"
         }
       },
-      "last_login": 1795479048000,
-      "level": 33,
+      "last_login": 1795517773000,
+      "level": 35,
       "professions": {
         "Cooking": 88,
         "Engineering": 151,
         "First Aid": 175,
         "Fishing": 20,
-        "Mining": 154
+        "Mining": 187
       },
       "race": "Dwarf",
       "raids": {},
@@ -523,12 +544,17 @@
         },
         "Azeroth Commerce Authority": {
           "name": "Neutral",
-          "raw": 2075,
+          "raw": 2200,
           "tier": 3
         },
         "Booty Bay": {
           "name": "Neutral",
           "raw": 500,
+          "tier": 3
+        },
+        "Brotherhood of the Horse": {
+          "name": "Neutral",
+          "raw": 1,
           "tier": 3
         },
         "Darkmoon Faire": {
@@ -538,7 +564,7 @@
         },
         "Darnassus": {
           "name": "Friendly",
-          "raw": 7026,
+          "raw": 7370,
           "tier": 4
         },
         "Gadgetzan": {
@@ -548,13 +574,23 @@
         },
         "Gnomeregan Exiles": {
           "name": "Honored",
-          "raw": 10975,
+          "raw": 11906,
           "tier": 5
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 15318,
+          "raw": 16118,
           "tier": 5
+        },
+        "Powderfuse": {
+          "name": "Neutral",
+          "raw": 500,
+          "tier": 3
+        },
+        "Ratchet": {
+          "name": "Neutral",
+          "raw": 500,
+          "tier": 3
         },
         "Silverwing Sentinels": {
           "name": "Neutral",
@@ -563,31 +599,31 @@
         },
         "Stormwind": {
           "name": "Honored",
-          "raw": 12321,
+          "raw": 13002,
           "tier": 5
         },
         "Wildhammer Clan": {
           "name": "Neutral",
-          "raw": 900,
+          "raw": 1325,
           "tier": 3
         }
       },
       "spec": "Marksmanship",
       "stats": {
         "critters": 29,
-        "deaths": 37,
-        "drinks": 72,
-        "flights": 65,
-        "food": 48,
-        "health_potions": 27,
-        "hearths": 16,
+        "deaths": 40,
+        "drinks": 93,
+        "flights": 77,
+        "food": 59,
+        "health_potions": 36,
+        "hearths": 20,
         "honorable_kills": 52,
-        "killing_blows": 2005,
+        "killing_blows": 2270,
         "mana_potions": 8,
-        "mobs": 3483,
-        "quests": 309
+        "mobs": 4107,
+        "quests": 341
       },
-      "xp": 27960
+      "xp": 43471
     }
   },
   "group": {},
@@ -598,7 +634,9 @@
         "62021": "Journeyman Engineer",
         "778": "Explore Duskwood",
         "779": "Explore Loch Modan",
-        "780": "Explore Redridge Mountains"
+        "780": "Explore Redridge Mountains",
+        "841": "Explore Wetlands",
+        "846": "Explore Thousand Needles"
       },
       "mounts": {
         "3111": "Cerulean Prideclaw",
