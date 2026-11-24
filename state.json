@@ -291,10 +291,10 @@
           "quality": "RARE"
         }
       },
-      "last_login": 1795502466000,
+      "last_login": 1795544801000,
       "level": 36,
       "professions": {
-        "Blacksmithing": 191,
+        "Blacksmithing": 207,
         "Cooking": 150,
         "First Aid": 14,
         "Fishing": 1,
@@ -312,11 +312,6 @@
           "name": "Hated",
           "raw": -6525,
           "tier": 0
-        },
-        "Booty Bay": {
-          "name": "Neutral",
-          "raw": 500,
-          "tier": 3
         },
         "Darkmoon Faire": {
           "name": "Neutral",
@@ -367,7 +362,7 @@
         "flights": 42,
         "food": 32,
         "health_potions": 56,
-        "hearths": 27,
+        "hearths": 28,
         "honorable_kills": 50,
         "killing_blows": 1759,
         "mana_potions": 15,
