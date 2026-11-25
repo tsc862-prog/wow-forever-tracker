@@ -552,14 +552,14 @@
           "quality": "RARE"
         }
       },
-      "last_login": 1795596112000,
-      "level": 38,
+      "last_login": 1795645423000,
+      "level": 39,
       "professions": {
         "Cooking": 88,
         "Engineering": 207,
         "First Aid": 175,
         "Fishing": 20,
-        "Mining": 195
+        "Mining": 226
       },
       "race": "Dwarf",
       "raids": {},
@@ -574,9 +574,14 @@
           "raw": 2200,
           "tier": 3
         },
+        "Bloodsail Buccaneers": {
+          "name": "Hated",
+          "raw": -6650,
+          "tier": 0
+        },
         "Booty Bay": {
           "name": "Neutral",
-          "raw": 550,
+          "raw": 620,
           "tier": 3
         },
         "Brotherhood of the Horse": {
@@ -591,37 +596,37 @@
         },
         "Darnassus": {
           "name": "Friendly",
-          "raw": 7741,
+          "raw": 7766,
           "tier": 4
         },
         "Everlook": {
           "name": "Neutral",
-          "raw": 550,
+          "raw": 597,
           "tier": 3
         },
         "Gadgetzan": {
           "name": "Neutral",
-          "raw": 650,
+          "raw": 697,
           "tier": 3
         },
         "Gnomeregan Exiles": {
           "name": "Honored",
-          "raw": 12277,
+          "raw": 12302,
           "tier": 5
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 16891,
+          "raw": 16991,
           "tier": 5
         },
         "Powderfuse": {
           "name": "Neutral",
-          "raw": 550,
+          "raw": 597,
           "tier": 3
         },
         "Ratchet": {
           "name": "Neutral",
-          "raw": 600,
+          "raw": 672,
           "tier": 3
         },
         "Silverwing Sentinels": {
@@ -631,7 +636,7 @@
         },
         "Stormwind": {
           "name": "Honored",
-          "raw": 14086,
+          "raw": 14111,
           "tier": 5
         },
         "Wildhammer Clan": {
@@ -640,22 +645,22 @@
           "tier": 3
         }
       },
-      "spec": "Marksmanship",
+      "spec": "Beast Mastery",
       "stats": {
         "critters": 33,
-        "deaths": 46,
-        "drinks": 126,
-        "flights": 86,
-        "food": 79,
+        "deaths": 48,
+        "drinks": 142,
+        "flights": 101,
+        "food": 87,
         "health_potions": 36,
-        "hearths": 21,
+        "hearths": 25,
         "honorable_kills": 52,
-        "killing_blows": 2615,
+        "killing_blows": 2725,
         "mana_potions": 8,
-        "mobs": 4762,
-        "quests": 397
+        "mobs": 4869,
+        "quests": 407
       },
-      "xp": 42181
+      "xp": 13183
     }
   },
   "group": {},
