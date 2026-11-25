@@ -542,14 +542,14 @@
           "quality": "RARE"
         }
       },
-      "last_login": 1795547255000,
+      "last_login": 1795570403000,
       "level": 36,
       "professions": {
         "Cooking": 88,
-        "Engineering": 151,
+        "Engineering": 207,
         "First Aid": 175,
         "Fishing": 20,
-        "Mining": 187
+        "Mining": 188
       },
       "race": "Dwarf",
       "raids": {},
@@ -564,6 +564,11 @@
           "raw": 2200,
           "tier": 3
         },
+        "Booty Bay": {
+          "name": "Neutral",
+          "raw": 550,
+          "tier": 3
+        },
         "Darkmoon Faire": {
           "name": "Neutral",
           "raw": 550,
@@ -571,23 +576,38 @@
         },
         "Darnassus": {
           "name": "Friendly",
-          "raw": 7447,
+          "raw": 7472,
           "tier": 4
+        },
+        "Everlook": {
+          "name": "Neutral",
+          "raw": 550,
+          "tier": 3
         },
         "Gadgetzan": {
           "name": "Neutral",
-          "raw": 600,
+          "raw": 650,
           "tier": 3
         },
         "Gnomeregan Exiles": {
           "name": "Honored",
-          "raw": 11983,
+          "raw": 12008,
           "tier": 5
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 16428,
+          "raw": 16453,
           "tier": 5
+        },
+        "Powderfuse": {
+          "name": "Neutral",
+          "raw": 550,
+          "tier": 3
+        },
+        "Ratchet": {
+          "name": "Neutral",
+          "raw": 600,
+          "tier": 3
         },
         "Silverwing Sentinels": {
           "name": "Neutral",
@@ -596,7 +616,7 @@
         },
         "Stormwind": {
           "name": "Honored",
-          "raw": 13080,
+          "raw": 13180,
           "tier": 5
         },
         "Wildhammer Clan": {
@@ -608,19 +628,19 @@
       "spec": "Marksmanship",
       "stats": {
         "critters": 29,
-        "deaths": 41,
-        "drinks": 95,
-        "flights": 81,
-        "food": 61,
+        "deaths": 42,
+        "drinks": 110,
+        "flights": 83,
+        "food": 74,
         "health_potions": 36,
-        "hearths": 20,
+        "hearths": 21,
         "honorable_kills": 52,
-        "killing_blows": 2292,
+        "killing_blows": 2434,
         "mana_potions": 8,
-        "mobs": 4146,
-        "quests": 352
+        "mobs": 4354,
+        "quests": 363
       },
-      "xp": 9450
+      "xp": 58791
     }
   },
   "group": {},
