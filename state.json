@@ -293,14 +293,14 @@
           "quality": "RARE"
         }
       },
-      "last_login": 1795722488000,
-      "level": 40,
+      "last_login": 1795744286000,
+      "level": 41,
       "professions": {
         "Blacksmithing": 225,
         "Cooking": 150,
         "First Aid": 14,
         "Fishing": 1,
-        "Mining": 208
+        "Mining": 210
       },
       "race": "Dwarf",
       "raids": {},
@@ -332,7 +332,7 @@
         },
         "Darnassus": {
           "name": "Friendly",
-          "raw": 8010,
+          "raw": 8135,
           "tier": 4
         },
         "Everlook": {
@@ -347,12 +347,12 @@
         },
         "Gnomeregan Exiles": {
           "name": "Honored",
-          "raw": 12558,
+          "raw": 12683,
           "tier": 5
         },
         "Ironforge": {
           "name": "Honored",
-          "raw": 17085,
+          "raw": 17285,
           "tier": 5
         },
         "Kirin Tor": {
@@ -377,7 +377,7 @@
         },
         "Stormwind": {
           "name": "Honored",
-          "raw": 17311,
+          "raw": 17736,
           "tier": 5
         },
         "Wildhammer Clan": {
@@ -388,20 +388,20 @@
       },
       "spec": "Protection",
       "stats": {
-        "critters": 30,
+        "critters": 34,
         "deaths": 35,
-        "drinks": 180,
-        "flights": 56,
-        "food": 44,
-        "health_potions": 61,
+        "drinks": 184,
+        "flights": 57,
+        "food": 48,
+        "health_potions": 64,
         "hearths": 32,
         "honorable_kills": 50,
-        "killing_blows": 2323,
+        "killing_blows": 2383,
         "mana_potions": 16,
-        "mobs": 5084,
-        "quests": 462
+        "mobs": 5304,
+        "quests": 469
       },
-      "xp": 75411
+      "xp": 21607
     },
     "us:kolsch-conjurer": {
       "achievements": {
