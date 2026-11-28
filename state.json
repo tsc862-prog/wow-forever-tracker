@@ -552,14 +552,14 @@
           "quality": "RARE"
         }
       },
-      "last_login": 1795758274000,
+      "last_login": 1795829748000,
       "level": 40,
       "professions": {
         "Cooking": 88,
         "Engineering": 207,
         "First Aid": 175,
         "Fishing": 20,
-        "Mining": 227
+        "Mining": 228
       },
       "race": "Dwarf",
       "raids": {},
@@ -649,18 +649,18 @@
       "stats": {
         "critters": 33,
         "deaths": 50,
-        "drinks": 147,
-        "flights": 107,
-        "food": 88,
-        "health_potions": 41,
+        "drinks": 151,
+        "flights": 109,
+        "food": 89,
+        "health_potions": 43,
         "hearths": 26,
         "honorable_kills": 52,
-        "killing_blows": 2930,
+        "killing_blows": 2999,
         "mana_potions": 8,
-        "mobs": 5153,
+        "mobs": 5221,
         "quests": 426
       },
-      "xp": 24351
+      "xp": 45231
     }
   },
   "group": {},
